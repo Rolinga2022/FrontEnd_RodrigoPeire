@@ -1,0 +1,22 @@
+<div class="container">
+  <header>
+    <h1>{{titulocomponente}}</h1>
+    <app-btnaddblanda 
+      textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
+      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}"
+      (btnClick)="alternarAgregar()"
+    ></app-btnaddblanda>
+  </header>
+
+  <app-mashabblanda
+    (agregarNewHabBlanda)="agregoHabBlanda($event)"
+    *ngIf="mostrarFormulario"
+  ></app-mashabblanda>
+  <br>
+  <app-itemhabblanda
+    *ngFor="let habBlanda of habBlandas"
+    [habBlanda]= "habBlanda"
+    (deleteHabBlanda)="elimHabBlanda(habBlanda)"
+  >
+  </app-itemhabblanda>
+</div>

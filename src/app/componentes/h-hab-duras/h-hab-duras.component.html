@@ -1,0 +1,53 @@
+<div class="container">
+  <header>
+    <h1>{{titulocomponente}}</h1>
+    <app-btnadddura
+      textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
+      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}"
+      (btnClick)="alternarAgregar()"
+    ></app-btnadddura>
+  </header>
+  
+  <app-mashabdura
+    (agregarNewHabDura)="agregoHabDura($event)"
+    *ngIf="mostrarFormulario"
+  ></app-mashabdura>
+  <br>
+  <app-itemhabdura
+    *ngFor="let habDura of habDuras"
+    [habDura]= "habDura"
+    (deleteHabDura)="elimHabDura(habDura)"
+  ></app-itemhabdura> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

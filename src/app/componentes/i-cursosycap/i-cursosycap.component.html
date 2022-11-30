@@ -1,0 +1,23 @@
+<div class="container">
+  <header>
+    <h1>{{titulocomponente}}</h1>
+    <app-btnaddcursos
+      textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
+      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}"
+      (btnClick)="alternarAgregar()"
+    >
+    </app-btnaddcursos>
+  </header>
+
+  <app-mascursos
+    (agregarNewCurso)="agregoCurso($event)"
+    *ngIf="mostrarFormulario"
+  ></app-mascursos>
+  <br>
+  <app-itemcursos
+    *ngFor="let curso of cursos"
+    [curso]= "curso"
+    (deleteCurso)="elimCurso(curso)"
+  ></app-itemcursos>
+    
+</div>

@@ -1,0 +1,10 @@
+.contenedor{
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 50px;
+  padding: 30px;
+  border-radius: 20px;
+  }
+
+  

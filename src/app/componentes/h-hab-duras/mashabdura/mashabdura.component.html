@@ -1,0 +1,28 @@
+<div>
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()">
+        <div class="form-floating mb-3 mt-3">
+            <input 
+                type="text"
+                class="form-control"
+                name="habilidad"
+                id="habilidad"
+                placeholder="Habilidad"
+                [(ngModel)] = "habilidad"
+            >
+            <label for="text">Habilidad</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input 
+                type="number"
+                class="form-control"
+                name="porcentaje"
+                id="porcentaje"
+                placeholder="Porcentaje"
+                [(ngModel)] = "porcentaje"
+            >
+            <label for="text">Porcentaje</label>
+        </div>
+
+        <input type="submit" value="Agregar" class="btn btn-danger">
+    </form>
+</div>

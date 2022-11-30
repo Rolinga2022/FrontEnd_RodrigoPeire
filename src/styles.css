@@ -1,0 +1,353 @@
+/* You can add global styles to this file, and also import other style files */
+/*:root {
+    --color-blue-medium: #8fe2e4;
+    --color-purple: #632ce7;
+    --color-gray: #ccc;
+    --color-gray-medium: #f8f9fa;
+    --color-yellow: #fac32c;
+  }
+  
+  /*###################################################################################################################################*/
+  
+  /*-----ESTILOS GENERALES-----*/
+  /*
+  *{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  }
+  
+  .nav > a {
+    color: #f50808;
+  }
+  
+  .container > .row {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  /*###################################################################################################################################*/
+  
+  /*-----SECCIONES DEL HTML------*/
+  
+  /*-----INICIO BARRA DE NAVEGACION------*/
+  /*
+  .navbar-brand > img {
+    width: 100px;
+    /*Para que en la seccion "nav", el elemento que contenga a la clase "navbar-brand, le aplique a su hijo directo "img" un ancho determinado*/
+  /*}
+  
+  .navbar-main .active {
+    text-decoration: underline wavy var(--color-gray);
+    text-underline-offset: 9px;
+  }
+  
+  /*-----FIN BARRA DE NAVEGACION------*/
+  
+  /*###################################################################################################################################*/
+  
+  /*-----INICIO HEADER------*/
+  /*
+  .icons-social-networks > a {
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s filter;
+  
+  }
+  
+  .icons-social-networks > a:hover {
+    filter: opacity(0.5);
+  }
+  
+  .bg-facebook {
+    background-color: #023693;
+  }
+  
+  .bg-linkedin {
+    background-color: #33a9f3;
+  }
+  
+  .header-main {
+    min-height: 60vh;
+  }
+  
+  
+  
+  /*-----FIN HEADER------*/
+  
+  /*###################################################################################################################################*/
+  
+  /*-----INICIO DE LA SECCION ¿Qué hago?------*/
+  /*
+  .icon-service {
+    --box-size: 70px;
+    width: var(--box-size);
+    height: var(--box-size);
+    padding: 10px;
+  }
+  
+  .modal-body > ul {
+    display: inline-block;
+    text-align: left; 
+  }
+  
+  /*-----FIN DE LA SECCION ¿Qué hago?------*/
+  
+  /*###################################################################################################################################*/
+  
+  /*-----INICIO DEL PORTFOLIO------*/
+  /*
+  .portfolio-item > img {
+    transition: 0.4s; 
+  }
+  
+  .portfolio-item:hover > img {
+    transform: scale(0.96); 
+  }
+  /*-----FIN DEL PORTFOLIO------*/
+  
+  /*###################################################################################################################################*/
+  
+  /*-----INICIO SECCION CLIENTES------*/
+  /*
+  .bg-purple {
+    background-color: rgba(131 87 235 / 0.3);
+    filter: opacity(0.55);
+  } /*Este estilo a la clase .bg-purple tambien se va aplicar en la seccion FOOTER*/
+  /*
+  .sec-clients > a {
+    transition: filter 0.4s;
+  }
+  
+  .sec-clients > a:hover {
+    filter: opacity(0.55);
+  }
+  
+  /*-----FIN SECCION CLIENTES------*/
+  
+  /*###################################################################################################################################*/
+  
+  
+  /*-------APARTADO PARA LOGRAR UNA VISTA RESPONSIVA EN DISPOSITIVOS MOVILES-------*/
+  /*
+  @media screen and (max-width: 376px) {
+    body {
+      margin-top: 4rem;
+    }
+    .header-main {
+      min-height: initial;
+    }
+  
+    .photo-frame {
+      font-size: 11px;
+    }
+  }
+
+  /*######################diseno del protfolio del arg progrma#######################*/
+
+/* You can add global styles to this file, and also import other style files */
+
+/*Estilos generales*/
+
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:Arial, Helvetica, sans-serif ;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;    
+}
+
+
+.container{
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 2px solid #d7dbd6;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.container > .row {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+.btn:focus {
+  outline: none;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.form-control {
+  margin: 20px 0;
+}
+
+.form-control label {
+  display: block;
+}
+
+.form-control input {
+  width: 100%;
+  height: 40px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 17px;
+}
+
+.form-control-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-control-check label {
+  flex: 1;
+}
+
+.form-control-check input {
+  flex: 2;
+  height: 20px;
+}
+
+
+
+/*Barra de navegation*/
+
+.nav > a {
+  color: #f50808;
+}
+
+.navbar-brand > img {
+  width: 100px;
+}
+
+.navbar-main .active {
+  text-decoration: underline wavy var(--color-gray);
+  text-underline-offset: 9px;
+}
+
+/*Encabezado*/
+
+.icons-social-networks > a {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s filter;
+}
+
+.icons-social-networks > a:hover {
+  filter: opacity(0.5);
+}
+
+.bg-facebook {
+  background-color: #023693;
+}
+
+.bg-linkedin {
+  background-color: #33a9f3;
+}
+
+.header-main {
+  min-height: 1vh;
+}
+
+/*Sobre mi*/
+
+/*Experiencia - (ver que sirve y que no)*/
+
+.icon-service {
+  --box-size: 70px;
+  width: var(--box-size);
+  height: var(--box-size);
+  padding: 10px;
+}
+
+.modal-body > ul {
+  display: inline-block;
+  text-align: left; 
+}
+
+
+/*Formacion academica*/
+
+/*Habilidades blandas*/
+
+/*Habilidades duras*/
+
+/*Cursos y capacitaciones*/
+
+/*Portfolio*/
+
+.portfolio-item > img {
+  transition: 0.4s; 
+}
+
+.portfolio-item:hover > img {
+  transform: scale(0.96); 
+}
+
+/*Clientes*/
+
+
+.bg-purple {
+  filter: opacity(0.55);
+  background-color: rgba(131 87 235 / 0.3);
+} /*Este estilo a la clase .bg-purple tambien se va aplicar en la seccion FOOTER*/
+  
+.sec-clients > a {
+  transition: filter 0.4s;
+}
+  
+.sec-clients > a:hover {
+  filter: opacity(0.55);
+}
+
+/*Contacto*/
+
+/*Footer*/
+
+/*Dise;o responsivo*/
+
+@media screen and (max-width: 376px) {
+  body {
+    margin-top: 4rem;
+  }
+  .header-main {
+    min-height: initial;
+  }
+
+  .photo-frame {
+    font-size: 11px;
+  }
+}
+
+

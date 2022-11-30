@@ -1,0 +1,22 @@
+<div class="container">
+  <header>
+    <h1>{{titulocomponente}}</h1>
+    <app-btnagregaracad
+      textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
+      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}"
+      (btnClick)="alternarAgregar()"  
+    ></app-btnagregaracad>
+  </header>
+
+  <app-masacademica
+    (agregarNewFormacion)="agregoFormacion($event)"
+    *ngIf="mostrarFormulario"
+  ></app-masacademica>
+  <br>
+  <app-itemacademico
+    *ngFor="let formacion of formaciones"
+    [formacion]= "formacion"
+    (deleteFormacion)="elimFormacion(formacion)"
+  >
+  </app-itemacademico>
+</div>

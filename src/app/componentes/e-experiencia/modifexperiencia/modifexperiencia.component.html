@@ -1,0 +1,48 @@
+<div>
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnEditar()">
+        <div class="form-floating mb-3 mt-3">
+        <input 
+            type="text" 
+            class="form-control" 
+            id="nombre" 
+            placeholder="Nombre" 
+            name="nombre"
+            [(ngModel)] = "nombre">
+        <label for="text">Editar Experiencia</label>
+        </div>
+    
+        <div class="form-floating mb-3 mt-3">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="empresa" 
+                placeholder="Empresa" 
+                name="empresa"
+                [(ngModel)] = "empresa">
+            <label for="text">Editar Empresa</label>
+            </div>
+    
+            <div class="form-floating mb-3 mt-3">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="tarea" 
+                    placeholder="Tareas" 
+                    name="tarea"
+                    [(ngModel)] = "tarea">
+                <label for="text">Editar Tareas</label>
+                </div>
+    
+                <div class="form-floating mb-3 mt-3">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="formato" 
+                        placeholder="Formato" 
+                        name="formato"
+                        [(ngModel)] = "formato">
+                    <label for="text">Editar Formato</label>
+                    </div>
+        <input type="submit" class="btn btn-danger" value="Editar">
+    </form>
+    </div>

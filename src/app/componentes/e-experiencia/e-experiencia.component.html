@@ -1,0 +1,29 @@
+<div class="container">
+  <header>
+    <h1>{{titulocomponente}}</h1>
+    <app-btnagregar 
+      textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
+      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}" 
+      (btnClick)="alternarAgregar()"
+    ></app-btnagregar>
+  </header>
+
+  <!--Para agregar las experiencias-->
+  <app-masexperiencias 
+    (agregarNewExperiencia)="agregoExperiencia($event)"
+    *ngIf="mostrarFormulario"
+    
+    ></app-masexperiencias>
+    <br>
+    
+
+  <!--Recorro la DB de experiencias-->
+  <app-itemexperiencia 
+    *ngFor="let experiencia of experiencias" 
+    [experiencia] = "experiencia"
+    (deleteExperiencia)="elimExperiencia(experiencia)"
+    
+    >
+  </app-itemexperiencia>
+  
+</div>

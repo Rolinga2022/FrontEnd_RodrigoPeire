@@ -1,0 +1,31 @@
+<div class="itemcurso">
+
+    <ul>
+        <li>
+            <h2><b>{{curso.nombre}}</b>
+                <div>
+                    <fa-icon
+                        [icon]="faEdit"
+                        [ngStyle]="{'color': mostrarFormModif ? 'black' : 'red'}"
+                        style="margin-right: 10px; cursor: pointer;"
+                        (click)="modificarCurso(curso)"
+                    ></fa-icon>
+            
+                    <fa-icon
+                        [icon]="faTimes"
+                        [ngStyle]="{'color': 'red'}"
+                        style="cursor: pointer;"
+                        (click)="borrarCurso(curso)"
+                    ></fa-icon>
+                </div>
+                </h2>
+                <p class="lead">{{curso.institucion}}</p>
+                <p class="lead">{{curso.tipo}}</p>
+                <p class="lead"><i>{{curso.year}}</i></p>
+        </li>
+    </ul>
+    <app-modifcursos
+        (modificarCurso)="editar($event)"
+        *ngIf="mostrarFormModif && clickEnBtn"
+    ></app-modifcursos>
+</div>

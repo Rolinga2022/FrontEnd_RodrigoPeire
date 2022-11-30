@@ -1,0 +1,32 @@
+<div class="itemhabdura">
+    <ul>
+        <li>
+            <h2><b>{{habDura.habilidad}}</b>
+                <div>
+                    <fa-icon
+                        [icon]="faEdit"
+                        [ngStyle]="{'color': mostrarFormModif ? 'black' : 'red'}"
+                        style="margin-right: 10px; cursor: pointer;"
+                        (click)="modificarHabDura(habDura)"
+                    ></fa-icon>
+            
+                    <fa-icon
+                        [icon]="faTimes"
+                        [ngStyle]="{'color': 'red'}"
+                        style="cursor: pointer;"
+                        (click)="borrarHabDura(habDura)"
+                    ></fa-icon>
+                </div>
+            </h2>
+            <div class="progress mt-4">
+                <div class="progress-bar bg-dark progress-bar-animated progress-bar-striped" [ngStyle]="{'width': porcentajeHab()}">
+                </div>
+            </div>
+        </li>
+    </ul>
+    <app-modifhabdura
+        (modificarHabDura)="editar($event)"
+        *ngIf="mostrarFormModif && clickEnBtn"
+    >
+    </app-modifhabdura>
+</div>
