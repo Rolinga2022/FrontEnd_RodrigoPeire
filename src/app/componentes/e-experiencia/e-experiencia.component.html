@@ -1,7 +1,9 @@
 <div class="container">
+  <!--Titulo del componente y boton agregar-->
   <header>
     <h1>{{titulocomponente}}</h1>
     <app-btnagregar 
+      *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
       classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}" 
       (btnClick)="alternarAgregar()"
@@ -10,20 +12,29 @@
 
   <!--Para agregar las experiencias-->
   <app-masexperiencias 
-    (agregarNewExperiencia)="agregoExperiencia($event)"
+    (agregarExp)="agregarUnaExp($event)"
     *ngIf="mostrarFormulario"
-    
-    ></app-masexperiencias>
-    <br>
+  ></app-masexperiencias>
     
 
-  <!--Recorro la DB de experiencias-->
-  <app-itemexperiencia 
-    *ngFor="let experiencia of experiencias" 
-    [experiencia] = "experiencia"
-    (deleteExperiencia)="elimExperiencia(experiencia)"
-    
-    >
-  </app-itemexperiencia>
-  
+  <!--Lista de Experiencias Laborales-->  
+  <div *ngFor="let Experiencia of expe">
+    <div class="itemexperiencia">
+      <hr>
+      <ul>
+        <li>
+          <h2><b>{{Experiencia.nombreE}}</b>
+            <div>
+              <button *ngIf="isLogged" class="btn btn-danger" routerLink="/modificarexp/{{Experiencia.id}}"><i class="bi bi-pencil-square"></i></button>
+              <button *ngIf="isLogged" class="btn btn-dark" (click)="delete(Experiencia.id)"><i class="bi bi-trash-fill"></i></button>
+            </div>
+          </h2>
+          <p class="lead">{{Experiencia.empresa}}</p>
+          <p class="lead">{{Experiencia.tarea}}</p>
+          <p class="lead"><i>{{Experiencia.formato}}</i></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </div>

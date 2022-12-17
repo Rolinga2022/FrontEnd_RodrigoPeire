@@ -1,13 +1,13 @@
 <div>
-<form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()">
+<form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()" novalidate #f="ngForm">
     <div class="form-floating mb-3 mt-3">
     <input 
         type="text" 
         class="form-control" 
-        id="nombre" 
+        id="nombreE" 
         placeholder="Nombre" 
-        name="nombre"
-        [(ngModel)] = "nombre">
+        name="nombreE"
+        [(ngModel)] = "nombreE" required>
     <label for="text">Ingrese Experiencia</label>
     </div>
 
@@ -18,7 +18,7 @@
             id="empresa" 
             placeholder="Empresa" 
             name="empresa"
-            [(ngModel)] = "empresa">
+            [(ngModel)] = "empresa" required>
         <label for="text">Ingrese Empresa</label>
         </div>
 
@@ -29,7 +29,7 @@
                 id="tarea" 
                 placeholder="Tareas" 
                 name="tarea"
-                [(ngModel)] = "tarea">
+                [(ngModel)] = "tarea" required>
             <label for="text">Ingrese Tareas</label>
             </div>
 
@@ -40,8 +40,8 @@
                     id="formato" 
                     placeholder="Formato" 
                     name="formato"
-                    [(ngModel)] = "formato">
-                <label for="text">Ingrese Formato</label>
+                    [(ngModel)] = "formato" required>
+                <label for="text">Ingrese Formato (Part-time, jornada completa, autónomo)</label>
                 </div>
     <input type="submit" class="btn btn-danger" value="Agregar">
 </form>

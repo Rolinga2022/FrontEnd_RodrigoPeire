@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Experiencia } from '../experiencia';
-import { Subscription } from 'rxjs'
-import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { ServExperienService } from 'src/app/servicios/experiencias/serv-experien.service';
+import { Experiencia } from 'src/app/model/experiencia/experiencia';
+
 
 @Component({
   selector: 'app-masexperiencias',
@@ -10,39 +10,34 @@ import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.se
 })
 export class MasexperienciasComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "masexperiencias", es decir, a la lista.
-  @Output() agregarNewExperiencia: EventEmitter<Experiencia> = new EventEmitter();
+  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR UNA NUEVA EXPERIENCIA
 
+  //en este caso, para pasarselo al comp "e-experiencia.component"
+  @Output() agregarExp: EventEmitter<Experiencia> = new EventEmitter();
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  nombre:string = "";
+  //Declaro e inicializo las variables que voy a recibir del template,
+  //es decir, del formulario "masexperiencia"
+  nombreE:string = "";
   empresa:string="";
   tarea:string = "";
   formato:string = "";
 
-  mostrarFormulario:boolean = false;
-  subscription?: Subscription;
-
-  constructor(private servInterfaz:ServInterfazService) { 
-    this.subscription = this.servInterfaz.alternarFormExp().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
-  }
+  constructor(private servExperiencia: ServExperienService) {}
 
   ngOnInit(): void {
   }
 
+  //Metodo para crear el elemento que va a ser enviado a traves del "Output"
+  //al componente "e-experiencia.component" para luego ser cargado a la DB
   clickEnAgregar() {
-    if(this.nombre.length !== 0){
-      const nuevaExperiencia = {
-        nombre: this.nombre,
-        empresa: this.empresa,
-        tarea: this.tarea,
-        formato: this.formato
-      }
-      this.agregarNewExperiencia.emit(nuevaExperiencia);
-      window.location.reload();
-      } else {
-        alert("NO INGRESASTE NINGUNA EXPERIENCIA")
-      }
+    const experiencia = {
+      nombreE: this.nombreE,
+      empresa: this.empresa,
+      tarea: this.tarea,
+      formato: this.formato
+    };
+    this.agregarExp.emit(experiencia);
   }
-
 }
+
+

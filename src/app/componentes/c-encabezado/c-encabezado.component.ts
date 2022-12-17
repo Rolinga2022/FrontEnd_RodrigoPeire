@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { persona } from 'src/app/model/persona/persona.model';
+import { ServPersonaService } from 'src/app/servicios/persona/serv-persona.service';
 
 
 @Component({
@@ -8,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CEncabezadoComponent implements OnInit {
 
-  constructor() { }
+  persona: persona = new persona('','','');
+
+  constructor(public personaService: ServPersonaService) { }
 
   ngOnInit(): void {
+
+    this.personaService.getPersona().subscribe(data => {this.persona = data})
+    
+
   }
 
 }

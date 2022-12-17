@@ -1,5 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Experiencia } from '../experiencia';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Experiencia } from 'src/app/model/experiencia/experiencia';
+import { ServExperienService } from 'src/app/servicios/experiencias/serv-experien.service';
+
 
 @Component({
   selector: 'app-modifexperiencia',
@@ -8,34 +11,34 @@ import { Experiencia } from '../experiencia';
 })
 export class ModifexperienciaComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "modifexperiencia", es decir, a la lista.
-  @Output() modificarExperiencia: EventEmitter<Experiencia> = new EventEmitter();
+  //Defino la variable expLab del tipo Experiencia q, en un principio, va a ser nula
+  expLab: Experiencia = null;
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  nombre:string = "";
-  empresa:string="";
-  tarea:string = "";
-  formato:string = "";
-
-
-  constructor() { }
+  constructor(private router: Router, private servExperiencia: ServExperienService, private activateRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la experiencia
+    this.servExperiencia.detail(id).subscribe(
+      data=>{
+        this.expLab = data;
+      }, err=>{
+        alert("Error al modificar")
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo detail
+    )
   }
 
-  clickEnEditar() {
-    if(this.nombre.length !== 0){
-      const modificacionExperiencia = {
-        nombre: this.nombre,
-        empresa: this.empresa,
-        tarea: this.tarea,
-        formato: this.formato
-      }
-      this.modificarExperiencia.emit(modificacionExperiencia);
-      window.location.reload();
-      } else {
-        alert("No realizaste modificacion")
-    }
+  //Metodo para modificar la experiencia
+  clickEnModificar(): void {
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la experiencia
+    this.servExperiencia.update(id, this.expLab).subscribe(
+      data => {
+        this.router.navigate(['portfolio']);
+      }, err=>{
+        alert("Error al modificar experiencia");
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo update que esta en el servicioExper para agregar los datos ingresados en el formulario
+    )
   }
 
 }

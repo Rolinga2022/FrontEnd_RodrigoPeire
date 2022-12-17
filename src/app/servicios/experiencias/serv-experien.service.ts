@@ -1,50 +1,45 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Experiencia } from 'src/app/componentes/e-experiencia/experiencia';
+import { Observable } from 'rxjs';
+import { Experiencia } from 'src/app/model/experiencia/experiencia';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'content-type' : 'aplication/json'
-  })
-}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServExperienService {
 
-  private apiUrl = 'http://localhost:5000/experiencias';
+  expURL = 'http://localhost:8080/explab/'
+  
 
-  private idExp:number = 0;
+  constructor(private http:HttpClient) {}
 
-
-  constructor(private http:HttpClient) { }
-
-  obtExperiencias():Observable<Experiencia[]> {
-    return this.http.get<Experiencia[]>(this.apiUrl);/*Con esto retorno, mediante una peticion get, el contenido
-    de la base de datos simulaada*/
+  //Todos los metodos a continuacion llaman a los metodos creados en el backend
+  
+  //Me devuelve la lista de experiencias que se encuentran en la DB
+  public lista(): Observable<Experiencia[]>{
+    return this.http.get<Experiencia[]>(this.expURL + 'lista');
   }
 
-  deleteExperiencia(experiencia:Experiencia):Observable<Experiencia> {
-    const url = `${this.apiUrl}/${experiencia.id}`; 
-    return this.http.delete<Experiencia>(url);
+  //Me devuelve la experiencia que se corresponde con el id en la DB
+  public detail(id: number): Observable<Experiencia> {
+    return this.http.get<Experiencia>(this.expURL + `detail/${id}`);
   }
 
-  addExperiencia(experiencia:Experiencia):Observable<Experiencia> {
-    return this.http.post<Experiencia>(this.apiUrl, experiencia);
+  //Para guardar datos en la DB
+  public save(experiencia: Experiencia): Observable<any> {
+    return this.http.post<any>(this.expURL + 'create', experiencia);
   }
 
-  //LOS DOS METODOS A CONTINUACION TRABAJAN EN CONJUNTO PARA MODIFICAR
-  idExperiencia(id:any) {
-    this.idExp = id;
-    return this.idExp; 
-  }
-  editarExperiencia(experienciaAModificar:Experiencia):Observable<Experiencia> {
-    const url = `${this.apiUrl}/${this.idExp}`; //creo que logro esto: http://localhost:5000/experiencias/idExp
-    return this.http.put<Experiencia>(url, experienciaAModificar);
+  //Para actualizar datos en la DB
+  public update(id: number, experiencia: Experiencia): Observable<any> {
+    return this.http.put<any>(this.expURL + `update/${id}`, experiencia);
   }
 
-
+  //Para borrar datos en la DB
+  public delete(id: number): Observable<any>{
+    return this.http.delete<any>(this.expURL + `delete/${id}`);
+  }
 
 }

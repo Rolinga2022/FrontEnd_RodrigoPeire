@@ -1,13 +1,67 @@
-<div>
-    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnEditar()">
+<div class="container" *ngIf="expLab">
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnModificar()" novalidate #f="ngForm">
         <div class="form-floating mb-3 mt-3">
         <input 
             type="text" 
             class="form-control" 
-            id="nombre" 
+            id="nombreE" 
             placeholder="Nombre" 
-            name="nombre"
-            [(ngModel)] = "nombre">
+            name="nombreE"
+            [(ngModel)] = "expLab.nombreE" required>
+        <label for="text">Modificar Experiencia</label>
+        </div>
+    
+        <div class="form-floating mb-3 mt-3">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="empresa" 
+                placeholder="Empresa" 
+                name="empresa"
+                [(ngModel)] = "expLab.empresa" required>
+            <label for="text">Modificar Empresa</label>
+            </div>
+    
+            <div class="form-floating mb-3 mt-3">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="tarea" 
+                    placeholder="Tareas" 
+                    name="tarea"
+                    [(ngModel)] = "expLab.tarea" required>
+                <label for="text">Modificar Tareas</label>
+                </div>
+    
+                <div class="form-floating mb-3 mt-3">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="formato" 
+                        placeholder="Formato" 
+                        name="formato"
+                        [(ngModel)] = "expLab.formato" required>
+                    <label for="text">Modificar Formato (Part-time, jornada completa, autónomo)</label>
+                </div>
+        <input type="submit" class="btn btn-danger" value="Modificar">
+    </form>
+</div>
+
+
+
+
+
+<!--*ngIf="expLab"  acordate de meter esto al lado del div-->
+  <!--  <div >
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnModificar()" novalidate #f="ngForm">
+        <div class="form-floating mb-3 mt-3">
+        <input 
+            type="text" 
+            class="form-control" 
+            id="nombreE" 
+            placeholder="Nombre" 
+            name="nombreE"
+            [(ngModel)]="expLab.nombreE" required>
         <label for="text">Editar Experiencia</label>
         </div>
     
@@ -18,7 +72,7 @@
                 id="empresa" 
                 placeholder="Empresa" 
                 name="empresa"
-                [(ngModel)] = "empresa">
+                [(ngModel)]="expLab.empresa" required>
             <label for="text">Editar Empresa</label>
             </div>
     
@@ -29,7 +83,7 @@
                     id="tarea" 
                     placeholder="Tareas" 
                     name="tarea"
-                    [(ngModel)] = "tarea">
+                    [(ngModel)]="expLab.tarea" required>
                 <label for="text">Editar Tareas</label>
                 </div>
     
@@ -40,9 +94,11 @@
                         id="formato" 
                         placeholder="Formato" 
                         name="formato"
-                        [(ngModel)] = "formato">
+                        [(ngModel)]="expLab.formato" required>
                     <label for="text">Editar Formato</label>
                     </div>
         <input type="submit" class="btn btn-danger" value="Editar">
     </form>
-    </div>
+    </div>-->
+
+    

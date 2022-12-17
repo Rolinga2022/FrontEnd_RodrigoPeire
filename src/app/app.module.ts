@@ -18,7 +18,7 @@ import { DSobreMiComponent } from './componentes/d-sobre-mi/d-sobre-mi.component
   import { EExperienciaComponent } from './componentes/e-experiencia/e-experiencia.component';
     import { MasexperienciasComponent } from './componentes/e-experiencia/masexperiencias/masexperiencias.component';
     import { BtnagregarComponent } from './componentes/e-experiencia/btnagregar/btnagregar.component';
-    import { ItemexperienciaComponent } from './componentes/e-experiencia/itemexperiencia/itemexperiencia.component';
+    //import { ItemexperienciaComponent } from './componentes/e-experiencia/itemexperiencia/itemexperiencia.component';
     import { ModifexperienciaComponent } from './componentes/e-experiencia/modifexperiencia/modifexperiencia.component';
 
   //Componente formacion academica
@@ -69,23 +69,7 @@ import { ServFormacionService } from './servicios/formaciones/serv-formacion.ser
 import { ServHabBlandaService } from './servicios/hab-blandas/serv-hab-blanda.service';
 import { ServHabDuraService } from './servicios/hab-duras/serv-hab-dura.service';
 import { ServCursosycapService } from './servicios/cursosycap/serv-cursosycap.service';
-import { RouterModule, Routes } from '@angular/router';
-
-
-
-//Rutas
-const appRutas:Routes = [
-
-  {path:'', component:BienvenidaComponent},
-  {path:'login', component:ALoginComponent},
-  {path:'portfolio', component:PortfoliorpComponent},
-  
-];
-
-
-
-
-
+import { ServPersonaService } from './servicios/persona/serv-persona.service';
 
 
 
@@ -107,7 +91,7 @@ const appRutas:Routes = [
     MFooterComponent,
     MasexperienciasComponent,
     BtnagregarComponent,
-    ItemexperienciaComponent,
+    //ItemexperienciaComponent,
     ModifexperienciaComponent,
     ItemacademicoComponent,
     MasacademicaComponent,
@@ -134,7 +118,7 @@ const appRutas:Routes = [
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRutas),
+    
   ],
   providers: [
     ServExperienService,
@@ -143,6 +127,7 @@ const appRutas:Routes = [
     ServHabBlandaService,
     ServHabDuraService,
     ServCursosycapService,
+    ServPersonaService
   ],
   bootstrap: [AppComponent]
 })

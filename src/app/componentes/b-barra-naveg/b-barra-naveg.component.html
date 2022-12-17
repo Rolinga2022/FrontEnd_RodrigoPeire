@@ -2,7 +2,7 @@
     <div class="container-fluid">
 
       <!--LOGO/MARCA/Brind-->
-      <a href="#" class="navbar-brand">
+      <a class="navbar-brand">
         <img src="assets/img/logo/Logo-r12.png" alt="Logo Rodrigo Peire">
       </a>
       
@@ -22,9 +22,9 @@
         <div class="nav ms-auto textdark flex-column flex-md-row">
           
 
-          <button class="btn btn-danger" routerLink="/login">Iniciar sesión</button>
-          <button class="btn btn-dark" style="margin-left: 5px;">Cerrar sesión</button>
+          <button class="btn btn-danger" (click)="login()"  *ngIf="!isLogged">Iniciar sesión</button>
+          <button class="btn btn-dark" style="margin-left: 5px;" (click)="onLogOut()" *ngIf="isLogged">Cerrar sesión</button>
         </div>
       </div>
     </div> 
-  </nav>
+</nav>
