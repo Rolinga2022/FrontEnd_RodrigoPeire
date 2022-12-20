@@ -49,7 +49,7 @@ export class EExperienciaComponent implements OnInit {
 
   }
 
-  ////Metodo para desplegar el formulario de agregar nueva experiencia
+  //Metodo para desplegar el formulario de agregar nueva experiencia
   alternarAgregar() {
     this.servInterfaz.mostrarAgregarExperiencia();
   }

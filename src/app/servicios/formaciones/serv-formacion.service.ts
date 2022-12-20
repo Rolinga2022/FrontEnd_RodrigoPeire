@@ -1,51 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Formacion } from 'src/app/componentes/f-academica/formacion';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Academica } from 'src/app/model/academica/academica';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'content-type' : 'aplication/json'
-  })
-}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServFormacionService {
 
-  private apiUrl = 'http://localhost:5000/formacion';
-
-  private idFormacion:number = 0;
-
-
+  expURL = 'http://localhost:8080/academico/'
 
   constructor(private http:HttpClient) { }
 
-
-  obtFormaciones():Observable<Formacion[]> {
-    return this.http.get<Formacion[]>(this.apiUrl);/*Con esto retorno, mediante una peticion get, el contenido
-    de la base de datos simulaada*/
+  //Todos los metodos a continuacion llaman a los metodos creados en el backend
+  
+  //Me devuelve la lista de formaciones academicas que se encuentran en la DB
+  public lista(): Observable<Academica[]>{
+    return this.http.get<Academica[]>(this.expURL + 'lista');
   }
 
-  deleteFormacion(formacion:Formacion):Observable<Formacion> {
-    const url = `${this.apiUrl}/${formacion.id}`; 
-    return this.http.delete<Formacion>(url);
+  //Me devuelve la formacion academica que se corresponde con el id en la DB
+  public detail(id: number): Observable<Academica> {
+    return this.http.get<Academica>(this.expURL + `detail/${id}`);
   }
 
-  addFormacion(formacion:Formacion):Observable<Formacion> {
-    return this.http.post<Formacion>(this.apiUrl, formacion);
+  //Para guardar datos en la DB
+  public save(academica: Academica): Observable<any> {
+    return this.http.post<any>(this.expURL + 'create', academica);
   }
 
-  //LOS DOS METODOS A CONTINUACION TRABAJAN EN CONJUNTO PARA MODIFICAR
-  idAcademico(id:any) {
-    this.idFormacion = id;
-    return this.idFormacion; 
+  //Para actualizar datos en la DB
+  public update(id: number, academica: Academica): Observable<any> {
+    return this.http.put<any>(this.expURL + `update/${id}`, academica);
   }
-  editarFormacion(formacionAModificar:Formacion):Observable<Formacion> {
-    const url = `${this.apiUrl}/${this.idFormacion}`; //creo que logro esto: http://localhost:5000/formacion/idFormacion
-    return this.http.put<Formacion>(url, formacionAModificar);
+
+  //Para borrar datos en la DB
+  public delete(id: number): Observable<any>{
+    return this.http.delete<any>(this.expURL + `delete/${id}`);
   }
+
 
 
 }

@@ -23,7 +23,6 @@ import { DSobreMiComponent } from './componentes/d-sobre-mi/d-sobre-mi.component
 
   //Componente formacion academica
   import { FAcademicaComponent } from './componentes/f-academica/f-academica.component';
-    import { ItemacademicoComponent } from './componentes/f-academica/itemacademico/itemacademico.component';
     import { MasacademicaComponent } from './componentes/f-academica/masacademica/masacademica.component';
     import { ModifacademicaComponent } from './componentes/f-academica/modifacademica/modifacademica.component';
     import { BtnagregaracadComponent } from './componentes/f-academica/btnagregaracad/btnagregaracad.component';
@@ -93,7 +92,7 @@ import { ServPersonaService } from './servicios/persona/serv-persona.service';
     BtnagregarComponent,
     //ItemexperienciaComponent,
     ModifexperienciaComponent,
-    ItemacademicoComponent,
+    //ItemacademicoComponent,
     MasacademicaComponent,
     ModifacademicaComponent,
     BtnagregaracadComponent,

@@ -1,5 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Formacion } from '../formacion';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Academica } from 'src/app/model/academica/academica';
+import { ServFormacionService } from 'src/app/servicios/formaciones/serv-formacion.service';
+
 
 @Component({
   selector: 'app-modifacademica',
@@ -8,31 +11,38 @@ import { Formacion } from '../formacion';
 })
 export class ModifacademicaComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "modifformacion", es decir, a la lista.
-  @Output() modificarFormacion: EventEmitter<Formacion> = new EventEmitter();
+  //Defino la variable formAcad del tipo Academica q, en un principio, va a ser nula
+  formAcad: Academica = null;
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  instituto:string = "";
-  titulo:string = "";
-  duracion:string = "";
-
-  constructor() { }
+  constructor(private router: Router, private servAcademico: ServFormacionService, private activateRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la formacion
+    this.servAcademico.detail(id).subscribe(
+      data=>{
+        this.formAcad = data;
+      }, err=>{
+        alert("Error al modificar")
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo detail
+    )
+
   }
 
-  clickEnEditar() {
-    if(this.instituto.length !== 0){
-      const modificacionFormacion = {
-        instituto: this.instituto,
-        titulo: this.titulo,
-        duracion: this.duracion
-      }
-      this.modificarFormacion.emit(modificacionFormacion);
-      window.location.reload();
-      } else {
-        alert("No realizaste modificacion")
+  //Metodo para modificar la formacion academica
+  clickEnModificar(): void {
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la formacion
+    this.servAcademico.update(id, this.formAcad).subscribe(
+      data => {
+        this.router.navigate(['portfolio']);
+      }, err=>{
+        alert("Error al modificar formacion academica");
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo update que esta en el servicioAcademico para agregar los datos ingresados en el formulario
+      )
     }
-  }
+
+  
 
 }

@@ -1,5 +1,5 @@
-<div>
-    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnEditar()" >
+<div class="container" *ngIf="formAcad">
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnModificar()" novalidate #f="ngForm" >
 
         <div class="form-floating mb-3 mt-3">
             <input 
@@ -8,7 +8,7 @@
                 name="instituto" 
                 id="instituto" 
                 placeholder="Instutucion"
-                [(ngModel)] = "instituto"
+                [(ngModel)] = "formAcad.nombreInstituto" required
                 >
             <label for="text">Editar Instituto</label>
         </div>
@@ -20,7 +20,7 @@
                 name="titulo" 
                 id="titulo" 
                 placeholder="Titulo"
-                [(ngModel)] = "titulo"
+                [(ngModel)] = "formAcad.titulo" required
                 >
             <label for="text">Editar Titulo</label>
         </div>
@@ -32,7 +32,7 @@
                 name="duracion" 
                 id="duracion" 
                 placeholder="Duracion"
-                [(ngModel)] = "duracion"
+                [(ngModel)] = "formAcad.duracion" required
                 >
             <label for="text">Editar Duracion</label>
         </div>

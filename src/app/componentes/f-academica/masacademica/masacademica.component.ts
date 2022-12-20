@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Formacion } from '../formacion';
-import { Subscription } from 'rxjs';
-import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
+import { Academica } from 'src/app/model/academica/academica';
+import { ServFormacionService } from 'src/app/servicios/formaciones/serv-formacion.service';
 
 
 @Component({
@@ -11,39 +10,31 @@ import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.se
 })
 export class MasacademicaComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "masacademica", es decir, a la lista.
-  @Output() agregarNewFormacion: EventEmitter<Formacion> = new EventEmitter();
+  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR UNA NUEVA EXPERIENCIA
 
+  //en este caso, para pasarselo al comp "f-academico.component"
+  @Output() agregarFormAcad: EventEmitter<Academica> = new EventEmitter();
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  instituto:string = "";
-  titulo:string = "";
+  //Declaro e inicializo las variables que voy a recibir del template,
+  //es decir, del formulario "masexperiencia"
+  nombreInstituto:string = "";
+  titulo:string="";
   duracion:string = "";
 
-
-  //para mostrar o no el formulario
-  mostrarFormulario:boolean = false;
-  subscription?: Subscription;
-
-  constructor(private servInterfaz:ServInterfazService) {
-    this.subscription = this.servInterfaz.alternarFormFormacion().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
-   }
+  constructor(private servAcademico: ServFormacionService) {}
 
   ngOnInit(): void {
   }
 
+ //Metodo para crear el elemento que va a ser enviado a traves del "Output"
+  //al componente "f-academica.component" para luego ser cargado a la DB
   clickEnAgregar() {
-    if(this.instituto.length !== 0){
-      const nuevaFormacion = {
-        instituto: this.instituto,
-        titulo: this.titulo,
-        duracion: this.duracion
-      }
-      this.agregarNewFormacion.emit(nuevaFormacion);
-      window.location.reload();
-      } else {
-        alert("NO INGRESASTE NINGUNA FORMACION")
-      }
+    const academica= {
+      nombreInstituto: this.nombreInstituto,
+      titulo: this.titulo,
+      duracion: this.duracion,
+    };
+    this.agregarFormAcad.emit(academica);
   }
 
 }

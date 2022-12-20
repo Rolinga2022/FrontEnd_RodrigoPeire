@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServFormacionService } from 'src/app/servicios/formaciones/serv-formacion.service';
-import { Formacion } from './formacion';
 import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
 import { Subscription } from 'rxjs';
+import { Academica } from 'src/app/model/academica/academica';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 
 @Component({
@@ -12,50 +13,80 @@ import { Subscription } from 'rxjs';
 })
 export class FAcademicaComponent implements OnInit {
 
+
+
+  //Titulo
   titulocomponente: string = "Formacion Academica";
 
-  mostrarFormulario:boolean = false;//para mostrar formulario
-  subscription?: Subscription;//para mostrar formulario
+  //Para mostrar formulario de AGREGAR formacion academica
+  mostrarFormulario:boolean = false;
+  subscription?: Subscription;
 
-  //inicializo la lista de tareas.
-  formaciones: Formacion[] = [];
+  //inicializo la lista de formaciones academicas.
+  formacion: Academica[] = [];
 
 
-  constructor(private servFormacion:ServFormacionService, private servInterfaz:ServInterfazService) { 
-    /*Lo siguiente, dentro del constructor, me ejecuta el servicio de alternar el formulario. Y luego, el valor recibido 
-    se lo asigno a la variable mostrarFormulario*/
+  constructor(private servAcademico:ServFormacionService, 
+              private servInterfaz:ServInterfazService, 
+              private tokenService:TokenService
+              ) { 
+    //Para ejecutar el servicio de alternar el formulario "AGREGAR". Y luego, el valor recibido se lo asigno a la variable mostrarFormulario
     this.subscription = this.servInterfaz.alternarFormFormacion().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
   }
 
+  //Booleano para verificar que estoy logueado
+  isLogged = false;
+
   ngOnInit(): void {
-    this.servFormacion.obtFormaciones().subscribe(datosObtenidos=>{
-      this.formaciones = datosObtenidos
-    });
-    /*los "datosObtenidos representan al retorno del metodo 'obtFormaciones'
-     del servicio de Formacion, es decir, la lista de formacion*/
+
+    //Para traer, desde el inicio, la lista con las formaciones academicas en la DB
+    this.cargarFormAcad();
+
+    //Condicion para verificar si estoy o no logueado
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged=false;
+    }
+
   }
 
-  //Para alternar el formulario de agregar
+  //Metodo para desplegar el formulario de agregar nueva formacion academica
   alternarAgregar() {
     this.servInterfaz.mostrarAgregarFormacion();
   }
 
-  elimFormacion(formacion:Formacion) {
-
-    this.servFormacion.deleteFormacion(formacion).subscribe(formacionElegida=>{
-      this.formaciones = this.formaciones.filter(formacionElegida=>formacionElegida.id !== formacion.id);/*me devuelve un arreglo que que cumpla con 
-      dicha condicion, es decir, que va a estar compuesto por los elementos cuyo id sean diferentes. Entonces, el elemento que yo seleccione 
-      trae consigo un id, cuando compara con los id existentes uno de los elementos va a tener el mismo id que seleccione, entoces, como ese
-      elemento no cumple con la condicion de id, lo aparta. Cuando finaliza, me devuleve un array con todos los elementos que tuvieron id
-      diferente al que yo seleccione*/
-    });
-   
+ //Metodo para traer la lista de formaciones cargadas en la DB a traves del servicio academico
+ cargarFormAcad():void{
+  this.servAcademico.lista().subscribe(data=>{
+    this.formacion = data;
   }
+  )
+}
 
-  agregoFormacion(formacion: Formacion) {
-    this.servFormacion.addFormacion(formacion).subscribe(formacionIngresada=>{
-      this.formaciones.push(formacionIngresada);
-    });
+ //Metodo para agregar una nueva formacion academica a la DB a traves del servicio academico
+ agregarUnaFormAcad(formAcadAAgregar: Academica){
+  this.servAcademico.save(formAcadAAgregar).subscribe(
+    data=>{
+      alert("Formacion academica creada");
+      window.location.reload();
+    }, err=> {
+      alert("Hubo un fallo");
+    }
+  )
+}
+
+  //Metodo para eliminar un formacion de la DB
+  delete(id?: number){
+  if(id != undefined){
+    this.servAcademico.delete(id).subscribe(
+      data=>{
+        this.cargarFormAcad();
+      }, err=>{
+        alert("No se pudo borrar la formacion academica");
+      }
+    )
   }
+}
 
 }
