@@ -5,6 +5,7 @@ import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.compone
 import { PortfoliorpComponent } from './componentes/portfoliorp/portfoliorp.component';
 import { ModifexperienciaComponent } from './componentes/e-experiencia/modifexperiencia/modifexperiencia.component';
 import { ModifacademicaComponent } from './componentes/f-academica/modifacademica/modifacademica.component';
+import { ModifhabblandaComponent } from './componentes/g-hab-blandas/modifhabblanda/modifhabblanda.component';
 
 const routes: Routes = [
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path:'login', component:ALoginComponent},
   {path:'portfolio', component:PortfoliorpComponent},
   {path:'modificarexp/:id', component:ModifexperienciaComponent},
-  {path:'modificarformacad/:id', component:ModifacademicaComponent}
+  {path:'modificarformacad/:id', component:ModifacademicaComponent},
+  {path:'modificarhabblanda/:id', component:ModifhabblandaComponent}
 
 
 ];

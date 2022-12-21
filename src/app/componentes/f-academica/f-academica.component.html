@@ -11,14 +11,10 @@
   </header>
 
   <!--Para agregar las formaciones academicas-->
-
   <app-masacademica 
   (agregarFormAcad)="agregarUnaFormAcad($event)"
     *ngIf="mostrarFormulario">
   </app-masacademica>
-
-  
-    
 
   <!--Lista de Formaciones academicas-->  
   <div *ngFor="let Formacion of formacion">

@@ -13,8 +13,6 @@ import { TokenService } from 'src/app/servicios/token/token.service';
 })
 export class FAcademicaComponent implements OnInit {
 
-
-
   //Titulo
   titulocomponente: string = "Formacion Academica";
 

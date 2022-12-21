@@ -10,7 +10,7 @@ import { ServFormacionService } from 'src/app/servicios/formaciones/serv-formaci
 })
 export class MasacademicaComponent implements OnInit {
 
-  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR UNA NUEVA EXPERIENCIA
+  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR UNA NUEVA habilidad blanda
 
   //en este caso, para pasarselo al comp "f-academico.component"
   @Output() agregarFormAcad: EventEmitter<Academica> = new EventEmitter();
@@ -29,7 +29,7 @@ export class MasacademicaComponent implements OnInit {
  //Metodo para crear el elemento que va a ser enviado a traves del "Output"
   //al componente "f-academica.component" para luego ser cargado a la DB
   clickEnAgregar() {
-    const academica= {
+    const academica = {
       nombreInstituto: this.nombreInstituto,
       titulo: this.titulo,
       duracion: this.duracion,

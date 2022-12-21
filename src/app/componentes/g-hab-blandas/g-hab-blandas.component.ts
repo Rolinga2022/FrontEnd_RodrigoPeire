@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServHabBlandaService } from 'src/app/servicios/hab-blandas/serv-hab-blanda.service';
-import { HabBlanda } from './habblanda';
 import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
 import { Subscription } from 'rxjs';
+import { HabBlanda } from 'src/app/model/hab-blanda/hab-blanda';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 @Component({
   selector: 'app-g-hab-blandas',
@@ -11,50 +12,81 @@ import { Subscription } from 'rxjs';
 })
 export class GHabBlandasComponent implements OnInit {
 
+  //titulo
   titulocomponente: string = "Habilidades Blandas";
 
-  mostrarFormulario:boolean = false;//para mostrar formulario
-  subscription?: Subscription;//para mostrar formulario
+  //Para mostrar formulario de AGREGAR
+  mostrarFormulario:boolean = false;
+  subscription?: Subscription;
 
-  //inicializo la lista de tareas.
+  //inicializo la lista de hab blandas.
   habBlandas: HabBlanda[] = [];
 
 
 
-  constructor(private servHabBlanda:ServHabBlandaService, private servInterfaz:ServInterfazService) { 
-    /*Lo siguiente, dentro del constructor, me ejecuta el servicio de alternar el formulario. Y luego, el valor recibido 
-    se lo asigno a la variable mostrarFormulario*/
+  constructor(private servHabBlanda:ServHabBlandaService, 
+              private servInterfaz:ServInterfazService,
+              private tokenService:TokenService
+              ) { 
+    //Para ejecutar el servicio de alternar el formulario "AGREGAR". Y luego, el valor recibido se lo asigno a la variable mostrarFormulario
     this.subscription = this.servInterfaz.alternarFormHabBlanda().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
   }
 
+  //Booleano para verificar que estoy logueado
+  isLogged = false;
+
   ngOnInit(): void {
-    this.servHabBlanda.obtHabBlandas().subscribe(datosObtenidos=>{
-      this.habBlandas = datosObtenidos
-    });
-    /*los "datosObtenidos representan al retorno del metodo 'obtHabBlandas'
-     del servicio de habblandas, es decir, la lista de habilidades blandas*/
+
+    //Para traer, desde el inicio, la lista con las habilidades blandas en la DB
+    this.cargarHabBlanda();
+
+    //Condicion para verificar si estoy o no logueado
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged=false;
+    }
+   
   }
 
-  //Para alternar el formulario de agregar
+  //Metodo para desplegar el formulario de agregar nueva formacion academica
   alternarAgregar() {
     this.servInterfaz.mostrarAgregarHabBlanda();
   }
 
-  elimHabBlanda(habBlanda:HabBlanda) {
-
-    this.servHabBlanda.deleteHAbBlanda(habBlanda).subscribe(habBlandaElegida=>{
-      this.habBlandas = this.habBlandas.filter(habBlandaElegida=>habBlandaElegida.id !== habBlanda.id);/*me devuelve un arreglo que que cumpla con 
-      dicha condicion, es decir, que va a estar compuesto por los elementos cuyo id sean diferentes. Entonces, el elemento que yo seleccione 
-      trae consigo un id, cuando compara con los id existentes uno de los elementos va a tener el mismo id que seleccione, entoces, como ese
-      elemento no cumple con la condicion de id, lo aparta. Cuando finaliza, me devuleve un array con todos los elementos que tuvieron id
-      diferente al que yo seleccione*/
-    });
+  //Metodo para traer la lista de hab blandas cargadas en la DB a traves del servicio hab blanda
+  cargarHabBlanda():void{
+    this.servHabBlanda.lista().subscribe(data=>{
+    this.habBlandas = data;
+    })
   }
 
-  agregoHabBlanda(habBlanda: HabBlanda) {
-    this.servHabBlanda.addHAbBlanda(habBlanda).subscribe(habBlandaIngresada=>{
-      this.habBlandas.push(habBlandaIngresada);
-    });
+  //Metodo para agregar una nueva formacion academica a la DB a traves del servicio academico
+  agregarUnaHabBlanda(habBlandaAAgregar: HabBlanda){
+    this.servHabBlanda.save(habBlandaAAgregar).subscribe(
+      data=>{
+        alert("Habilidad blanda creada");
+        window.location.reload();
+      }, err=> {
+        alert("Hubo un fallo");
+      }
+    )
   }
+
+  //Metodo para eliminar un formacion de la DB
+  delete(id?: number){
+    if(id != undefined){
+      this.servHabBlanda.delete(id).subscribe(
+        data=>{
+          this.cargarHabBlanda();
+        }, err=>{
+          alert("No se pudo borrar la Habilidad blanda");
+        }
+      )
+    }
+  }
+
+ 
+
 
 }

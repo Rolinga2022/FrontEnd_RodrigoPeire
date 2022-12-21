@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HabBlanda } from '../habblanda';
-import { Subscription } from 'rxjs';
-import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { HabBlanda } from 'src/app/model/hab-blanda/hab-blanda';
+import { ServHabBlandaService } from 'src/app/servicios/hab-blandas/serv-hab-blanda.service';
+
 
 @Component({
   selector: 'app-mashabblanda',
@@ -10,36 +10,30 @@ import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.se
 })
 export class MashabblandaComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "masahabblanda", es decir, a la lista.
-  @Output() agregarNewHabBlanda: EventEmitter<HabBlanda> = new EventEmitter();
+  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR UNA NUEVA habilidad blanda
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  habilidad:string = "";
+  //en este caso, para pasarselo al comp "g-habblanda.component"
+  @Output() agregarHabBlanda: EventEmitter<HabBlanda> = new EventEmitter();
+  
+  //Declaro e inicializo las variables que voy a recibir del template,
+  //es decir, del formulario "masexperiencia"
+  nombreHabBlanda:string = "";
   porcentaje:number = 0;
 
-  //para mostrar o no el formulario
-  mostrarFormulario:boolean = false;
-  subscription?: Subscription;
-  
-
-  constructor(private servInterfaz:ServInterfazService) { 
-    this.subscription = this.servInterfaz.alternarFormHabBlanda().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
-  }
+  constructor(private servHabBlanda:ServHabBlandaService) { }
 
   ngOnInit(): void {
   }
 
+  //Metodo para crear el elemento que va a ser enviado a traves del "Output"
+  //al componente "g-habblanda.component" para luego ser cargado a la DB
   clickEnAgregar() {
-    if(this.habilidad.length !== 0){
-      const nuevaHabBlanda = {
-        habilidad: this.habilidad,
-        porcentaje: this.porcentaje,
-      }
-      this.agregarNewHabBlanda.emit(nuevaHabBlanda);
-      window.location.reload();
-      } else {
-        alert("NO INGRESASTE NINGUNA HABILIDAD BLANDA")
-      }
+    const habBlanda = {
+      nombreHabBlanda: this.nombreHabBlanda,
+      porcentaje: this.porcentaje,
+    };
+    this.agregarHabBlanda.emit(habBlanda);
   }
+
 
 }

@@ -1,5 +1,5 @@
 <div>
-    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()">
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()" novalidate #f="ngForm">
         <div class="form-floating mb-3 mt-3">
             <input 
                 type="text"
@@ -7,7 +7,7 @@
                 name="habilidad"
                 id="habilidad"
                 placeholder="Habilidad"
-                [(ngModel)] = "habilidad"
+                [(ngModel)] = "nombreHabBlanda"
                 >
             <label for="text">Habilidad</label>
         </div>

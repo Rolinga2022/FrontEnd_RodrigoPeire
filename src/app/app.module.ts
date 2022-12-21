@@ -30,7 +30,6 @@ import { DSobreMiComponent } from './componentes/d-sobre-mi/d-sobre-mi.component
   //Componente habilidades blandas
   import { GHabBlandasComponent } from './componentes/g-hab-blandas/g-hab-blandas.component';
     import { BtnaddblandaComponent } from './componentes/g-hab-blandas/btnaddblanda/btnaddblanda.component';
-    import { ItemhabblandaComponent } from './componentes/g-hab-blandas/itemhabblanda/itemhabblanda.component';
     import { MashabblandaComponent } from './componentes/g-hab-blandas/mashabblanda/mashabblanda.component';
     import { ModifhabblandaComponent } from './componentes/g-hab-blandas/modifhabblanda/modifhabblanda.component';
 
@@ -59,6 +58,8 @@ import { DSobreMiComponent } from './componentes/d-sobre-mi/d-sobre-mi.component
 
 //Edicion de iconos
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+//Progreso en circulo
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 //servicios
 import { ServExperienService } from './servicios/experiencias/serv-experien.service'; 
@@ -97,7 +98,7 @@ import { ServPersonaService } from './servicios/persona/serv-persona.service';
     ModifacademicaComponent,
     BtnagregaracadComponent,
     BtnaddblandaComponent,
-    ItemhabblandaComponent,
+    //ItemhabblandaComponent,
     MashabblandaComponent,
     ModifhabblandaComponent,
     BtnaddduraComponent,
@@ -117,6 +118,8 @@ import { ServPersonaService } from './servicios/persona/serv-persona.service';
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
+    NgCircleProgressModule.forRoot({}),
+    
     
   ],
   providers: [

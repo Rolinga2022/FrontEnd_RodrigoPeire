@@ -1,5 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HabBlanda } from '../habblanda';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HabBlanda } from 'src/app/model/hab-blanda/hab-blanda';
+import { ServHabBlandaService } from 'src/app/servicios/hab-blandas/serv-hab-blanda.service';
+
 
 @Component({
   selector: 'app-modifhabblanda',
@@ -8,31 +11,41 @@ import { HabBlanda } from '../habblanda';
 })
 export class ModifhabblandaComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "modifHabBlanda", es decir, a la lista.
-  @Output() modificarHabBlanda: EventEmitter<HabBlanda> = new EventEmitter();
-
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  habilidad:string = "";
-  porcentaje:number = 0;
+  //Defino la variable formAcad del tipo Academica q, en un principio, va a ser nula
+  habBlanda: HabBlanda = null;
 
 
-
-  constructor() { }
+  constructor(private router: Router, 
+              private servHabBlanda: ServHabBlandaService, 
+              private activateRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la habblanda
+    this.servHabBlanda.detail(id).subscribe(
+      data=>{
+        this.habBlanda = data;
+      }, err=>{
+        alert("Error al modificar")
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo detail
+    )
+
   }
 
-  clickEnEditar() {
-    if(this.habilidad.length !== 0){
-      const modificacionHabBlanda = {
-        habilidad: this.habilidad,
-        porcentaje: this.porcentaje,
-      }
-      this.modificarHabBlanda.emit(modificacionHabBlanda);
-      window.location.reload();
-      } else {
-        alert("No realizaste modificacion")
+  //Metodo para modificar la habilidad blanda
+  clickEnModificar(): void {
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la hab blanda
+    this.servHabBlanda.update(id, this.habBlanda).subscribe(
+      data => {
+        this.router.navigate(['portfolio']);
+      }, err=>{
+        alert("Error al modificar habilidad blanda");
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo update que esta en el servicioHabBlanda para agregar los datos ingresados en el formulario
+      )
     }
-  }
+
+
 
 }

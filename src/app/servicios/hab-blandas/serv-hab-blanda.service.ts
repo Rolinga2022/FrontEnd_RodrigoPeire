@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { HabBlanda } from 'src/app/componentes/g-hab-blandas/habblanda';
+import { HttpClient } from '@angular/common/http';
+import { HabBlanda } from 'src/app/model/hab-blanda/hab-blanda';
+import { Observable } from 'rxjs';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'content-type' : 'aplication/json'
-  })
-}
 
 
 @Injectable({
@@ -16,35 +11,35 @@ const httpOptions = {
 })
 export class ServHabBlandaService {
 
-  private apiUrl = 'http://localhost:5000/hab-blanda';
-
-  private idHabBlanda:number = 0;
+  expURL = 'http://localhost:8080/habblanda/'
 
   constructor(private http:HttpClient) { }
 
-
-  obtHabBlandas():Observable<HabBlanda[]> {
-    return this.http.get<HabBlanda[]>(this.apiUrl);/*Con esto retorno, mediante una peticion get, el contenido
-    de la base de datos simulaada*/
+   //Todos los metodos a continuacion llaman a los metodos creados en el backend
+  
+  //Me devuelve la lista de habilidades blandas academicas que se encuentran en la DB
+  public lista(): Observable<HabBlanda[]>{
+    return this.http.get<HabBlanda[]>(this.expURL + 'lista');
   }
 
-  deleteHAbBlanda(habBlanda:HabBlanda):Observable<HabBlanda> {
-    const url = `${this.apiUrl}/${habBlanda.id}`; 
-    return this.http.delete<HabBlanda>(url);
+  //Me devuelve la hab blanda que se corresponde con el id en la DB
+  public detail(id: number): Observable<HabBlanda> {
+    return this.http.get<HabBlanda>(this.expURL + `detail/${id}`);
   }
 
-  addHAbBlanda(habBlanda:HabBlanda):Observable<HabBlanda> {
-    return this.http.post<HabBlanda>(this.apiUrl, habBlanda);
+  //Para guardar datos en la DB
+  public save(habBlanda: HabBlanda): Observable<any> {
+    return this.http.post<any>(this.expURL + 'create', habBlanda);
   }
 
-  //LOS DOS METODOS A CONTINUACION TRABAJAN EN CONJUNTO PARA MODIFICAR
-  idHAbBlanda(id:any) {
-    this.idHabBlanda = id;
-    return this.idHabBlanda; 
+  //Para actualizar datos en la DB
+  public update(id: number, habBlanda: HabBlanda): Observable<any> {
+    return this.http.put<any>(this.expURL + `update/${id}`, habBlanda);
   }
-  editarHAbBlanda(habBlandaAModificar:HabBlanda):Observable<HabBlanda> {
-    const url = `${this.apiUrl}/${this.idHabBlanda}`; //creo que logro esto: http://localhost:5000/hab-blanda/idHabBlanda
-    return this.http.put<HabBlanda>(url, habBlandaAModificar);
+
+  //Para borrar datos en la DB
+  public delete(id: number): Observable<any>{
+    return this.http.delete<any>(this.expURL + `delete/${id}`);
   }
 
 
