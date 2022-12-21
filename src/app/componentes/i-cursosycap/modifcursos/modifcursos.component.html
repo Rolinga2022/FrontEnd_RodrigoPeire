@@ -1,5 +1,5 @@
-<div>
-    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnEditar()">
+<div class="container" *ngIf="cursoYCap" >
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnModificar()" novalidate #f="ngForm" >
         <div class="form-floating mb-3 mt-3">
             <input 
             type="text"
@@ -7,7 +7,7 @@
             name="nombre"
             id="nombre"
             placeholder="Nombre"
-            [(ngModel)] = "nombre"
+            [(ngModel)] = "cursoYCap.nombreCurso"
             >
             <label for="text">Editar Nombre</label>
         </div>
@@ -19,9 +19,9 @@
             name="institucion"
             id="institucion"
             placeholder="Institucion"
-            [(ngModel)] = "institucion"
+            [(ngModel)] = "cursoYCap.institucion"
             >
-            <label for="text">Editar Institucion</label>
+            <label for="text">Editar Institución</label>
         </div>
 
         <div class="form-floating mb-3 mt-3">
@@ -31,7 +31,7 @@
             name="tipo"
             id="tipo"
             placeholder="Curso o Capacitacion"
-            [(ngModel)] = "tipo"
+            [(ngModel)] = "cursoYCap.tipo"
             >
             <label for="text">Editar Tipo</label>
         </div>
@@ -43,7 +43,7 @@
             name="year"
             id="year"
             placeholder="Año de realización"
-            [(ngModel)] = "year"
+            [(ngModel)] = "cursoYCap.year"
             >
             <label for="text">Editar Año</label>
         </div>

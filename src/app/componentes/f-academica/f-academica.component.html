@@ -2,12 +2,12 @@
   <!--Titulo del componente y boton agregar-->
   <header>
     <h1>{{titulocomponente}}</h1>
-    <app-btnagregar 
+    <app-btnagregaracad 
       *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
       classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}" 
       (btnClick)="alternarAgregar()"
-    ></app-btnagregar>
+    ></app-btnagregaracad>
   </header>
 
   <!--Para agregar las formaciones academicas-->

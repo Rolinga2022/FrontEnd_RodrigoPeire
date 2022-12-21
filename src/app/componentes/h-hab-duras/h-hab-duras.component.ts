@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServHabDuraService } from 'src/app/servicios/hab-duras/serv-hab-dura.service';
-import { HabDura } from './habdura';
 import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
 import { Subscription } from 'rxjs';
+import { HabDura } from 'src/app/model/hab-dura/hab-dura';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 @Component({
   selector: 'app-h-hab-duras',
@@ -11,48 +12,77 @@ import { Subscription } from 'rxjs';
 })
 export class HHabDurasComponent implements OnInit {
 
+  //titulo
   titulocomponente: string = "Habilidades Duras";
 
-  mostrarFormulario:boolean = false;//para mostrar formulario
-  subscription?: Subscription;//para mostrar formulario
+  //Para mostrar formulario de AGREGAR
+  mostrarFormulario:boolean = false;
+  subscription?: Subscription;
 
-  //inicializo la lista de tareas.
+  //inicializo la lista de hab Dura.
   habDuras: HabDura[] = [];
 
-  constructor(private servHabDura:ServHabDuraService, private servInterfaz:ServInterfazService) { 
-    /*Lo siguiente, dentro del constructor, me ejecuta el servicio de alternar el formulario. Y luego, el valor recibido 
-    se lo asigno a la variable mostrarFormulario*/
+  constructor(private servHabDura:ServHabDuraService, 
+              private servInterfaz:ServInterfazService,
+              private tokenService:TokenService) { 
+    //Para ejecutar el servicio de alternar el formulario "AGREGAR". Y luego, el valor recibido se lo asigno a la variable mostrarFormulario
     this.subscription = this.servInterfaz.alternarFormHabDura().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
   }
 
+  //Booleano para verificar que estoy logueado
+  isLogged = false;
+
   ngOnInit(): void {
-    this.servHabDura.obtHabDuras().subscribe(datosObtenidos=>{
-      this.habDuras = datosObtenidos
-    });
-    /*los "datosObtenidos representan al retorno del metodo 'obtHabDuras'
-     del servicio de habDuras, es decir, la lista de habilidades duras*/
+    
+    //Para traer, desde el inicio, la lista con las habilidades duras en la DB
+    this.cargarHabDura();
+
+    //Condicion para verificar si estoy o no logueado
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged=false;
+    }
+
   }
 
-  //Para alternar el formulario de agregar
+  //Metodo para desplegar el formulario de agregar nueva hab dura
   alternarAgregar() {
     this.servInterfaz.mostrarAgregarHabDura();
   }
 
-  elimHabDura(habDura:HabDura) {
-
-    this.servHabDura.deleteHAbDura(habDura).subscribe(habDuraElegida=>{
-      this.habDuras = this.habDuras.filter(habDuraElegida=>habDuraElegida.id !== habDura.id);/*me devuelve un arreglo que que cumpla con 
-      dicha condicion, es decir, que va a estar compuesto por los elementos cuyo id sean diferentes. Entonces, el elemento que yo seleccione 
-      trae consigo un id, cuando compara con los id existentes uno de los elementos va a tener el mismo id que seleccione, entoces, como ese
-      elemento no cumple con la condicion de id, lo aparta. Cuando finaliza, me devuleve un array con todos los elementos que tuvieron id
-      diferente al que yo seleccione*/
-    });
+  //Metodo para traer la lista de hab duras cargadas en la DB a traves del servicio hab dura
+  cargarHabDura():void{
+    this.servHabDura.lista().subscribe(data=>{
+    this.habDuras = data;
+    })
   }
 
-  agregoHabDura(habDura: HabDura) {
-    this.servHabDura.addHAbDura(habDura).subscribe(habDuraIngresada=>{
-      this.habDuras.push(habDuraIngresada);
-    });
+   //Metodo para agregar una nueva hab dura a la DB a traves del servicio hab dura
+   agregarUnaHabDura(habDuraAAgregar: HabDura){
+    this.servHabDura.save(habDuraAAgregar).subscribe(
+      data=>{
+        alert("Habilidad dura creada");
+        window.location.reload();
+      }, err=> {
+        alert("Hubo un fallo");
+      }
+    )
   }
+
+  //Metodo para eliminar un habilidad dura de la DB
+  delete(id?: number){
+    if(id != undefined){
+      this.servHabDura.delete(id).subscribe(
+        data=>{
+          this.cargarHabDura();
+        }, err=>{
+          alert("No se pudo borrar la Habilidad dura");
+        }
+      )
+    }
+  }
+
+ 
 
 }

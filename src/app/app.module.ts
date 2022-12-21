@@ -36,14 +36,12 @@ import { DSobreMiComponent } from './componentes/d-sobre-mi/d-sobre-mi.component
   //Componente habilidades duras
   import { HHabDurasComponent } from './componentes/h-hab-duras/h-hab-duras.component';
     import { BtnaddduraComponent } from './componentes/h-hab-duras/btnadddura/btnadddura.component';
-    import { ItemhabduraComponent } from './componentes/h-hab-duras/itemhabdura/itemhabdura.component';
     import { MashabduraComponent } from './componentes/h-hab-duras/mashabdura/mashabdura.component';
     import { ModifhabduraComponent } from './componentes/h-hab-duras/modifhabdura/modifhabdura.component';
 
   //Componente cursos y capacitaciones
   import { ICursosycapComponent } from './componentes/i-cursosycap/i-cursosycap.component';
     import { BtnaddcursosComponent } from './componentes/i-cursosycap/btnaddcursos/btnaddcursos.component';
-    import { ItemcursosComponent } from './componentes/i-cursosycap/itemcursos/itemcursos.component';
     import { MascursosComponent } from './componentes/i-cursosycap/mascursos/mascursos.component';
     import { ModifcursosComponent } from './componentes/i-cursosycap/modifcursos/modifcursos.component';
   //Componente Portfolio
@@ -102,11 +100,11 @@ import { ServPersonaService } from './servicios/persona/serv-persona.service';
     MashabblandaComponent,
     ModifhabblandaComponent,
     BtnaddduraComponent,
-    ItemhabduraComponent,
+    //ItemhabduraComponent,
     MashabduraComponent,
     ModifhabduraComponent,
     BtnaddcursosComponent,
-    ItemcursosComponent,
+    //ItemcursosComponent,
     MascursosComponent,
     ModifcursosComponent,
     PortfoliorpComponent,

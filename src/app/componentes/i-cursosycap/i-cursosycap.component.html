@@ -1,23 +1,42 @@
 <div class="container">
+  <!--Titulo del componente y boton agregar-->
   <header>
     <h1>{{titulocomponente}}</h1>
+
     <app-btnaddcursos
+      *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
-      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}"
-      (btnClick)="alternarAgregar()"
-    >
+      classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}" 
+      (btnClick)="alternarAgregar()">
     </app-btnaddcursos>
+    
   </header>
 
+  <!--Para agregar cursos-->
   <app-mascursos
-    (agregarNewCurso)="agregoCurso($event)"
-    *ngIf="mostrarFormulario"
-  ></app-mascursos>
-  <br>
-  <app-itemcursos
-    *ngFor="let curso of cursos"
-    [curso]= "curso"
-    (deleteCurso)="elimCurso(curso)"
-  ></app-itemcursos>
-    
+    (agregarCurso)="agregarUnCurso($event)"
+    *ngIf="mostrarFormulario">>
+  </app-mascursos>
+  
+
+  <!--Lista de Cursos-->  
+  <div *ngFor="let Curso of curso">
+    <div class="itemcursos">
+      <hr>
+      <ul>
+        <li>
+          <h2><b>{{Curso.nombreCurso}}</b>
+            <div>
+              <button *ngIf="isLogged" class="btn btn-danger" routerLink="/modificarcursos/{{Curso.id}}"><i class="bi bi-pencil-square"></i></button>
+              <button *ngIf="isLogged" class="btn btn-dark" (click)="delete(Curso.id)"><i class="bi bi-trash-fill"></i></button>
+            </div>
+          </h2>
+          <p class="lead">{{Curso.institucion}}</p>
+          <p class="lead">{{Curso.tipo}}</p>
+          <p class="lead">{{Curso.year}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </div>

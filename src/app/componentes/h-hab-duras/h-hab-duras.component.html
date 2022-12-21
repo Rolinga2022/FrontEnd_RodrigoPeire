@@ -2,24 +2,43 @@
   <header>
     <h1>{{titulocomponente}}</h1>
     <app-btnadddura
+      *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
       classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}"
-      (btnClick)="alternarAgregar()"
-    ></app-btnadddura>
+      (btnClick)="alternarAgregar()">
+    </app-btnadddura>
   </header>
-  
-  <app-mashabdura
-    (agregarNewHabDura)="agregoHabDura($event)"
-    *ngIf="mostrarFormulario"
-  ></app-mashabdura>
-  <br>
-  <app-itemhabdura
-    *ngFor="let habDura of habDuras"
-    [habDura]= "habDura"
-    (deleteHabDura)="elimHabDura(habDura)"
-  ></app-itemhabdura> 
-</div>
 
+  <app-mashabdura
+    (agregarHabDura)="agregarUnaHabDura($event)"
+    *ngIf="mostrarFormulario">
+  </app-mashabdura>
+  <br>
+
+  <div class="row "> 
+    <div  class="text-center col-md-3 col-lg-3 habdura" 
+          *ngFor="let HabDura of habDuras">
+            <circle-progress
+            [percent]="(HabDura.porcentaje)"
+            [radius]="100"
+            [title]="(HabDura.nombreHabDura)"
+            [showUnits]="false"
+            [showSubtitle]="false"
+            [responsive]="true"
+            [outerStrokeWidth]="16"
+            [innerStrokeWidth]="2"
+            [outerStrokeColor]="'#3b9d06'"
+            [innerStrokeColor]="'#C7E596'"
+            [animation]="true"
+            [animationDuration]="600"
+            ></circle-progress>
+            <div>
+              <button *ngIf="isLogged" class="btn btn-danger" routerLink="/modificarhabdura/{{HabDura.id}}"><i class="bi bi-pencil-square"></i></button>
+              <button *ngIf="isLogged" class="btn btn-dark" (click)="delete(HabDura.id)"><i class="bi bi-trash-fill"></i></button>
+            </div>
+          </div>    
+  </div>   
+</div>
 
 
 

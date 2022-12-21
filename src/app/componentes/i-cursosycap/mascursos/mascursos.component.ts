@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Curso } from '../curso';
-import { Subscription } from 'rxjs';
-import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CursosYCap } from 'src/app/model/cursosycap/cursosycap';
+import { ServCursosycapService } from 'src/app/servicios/cursosycap/serv-cursosycap.service';
+
 
 @Component({
   selector: 'app-mascursos',
@@ -10,42 +10,37 @@ import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.se
 })
 export class MascursosComponent implements OnInit {
 
+  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR un nuevo curso
 
-  //Para pasarle al elemento por fuera de "masahabblanda", es decir, a la lista.
-  @Output() agregarNewCurso: EventEmitter<Curso> = new EventEmitter();
+  //en este caso, para pasarselo al componenete padre
+  @Output() agregarCurso: EventEmitter<CursosYCap> = new EventEmitter();
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  nombre:string = "";
-  institucion:string = "";
+  //Declaro e inicializo las variables que voy a recibir del template,
+  //es decir, del formulario "mascursosycap"
+  nombreCurso:string = "";
+  institucion:string="";
   tipo:string = "";
   year:string = "";
 
-  //para mostrar o no el formulario
-  mostrarFormulario:boolean = false;
-  subscription?: Subscription;
-
-
-
-  constructor(private servInterfaz:ServInterfazService) {
-    this.subscription = this.servInterfaz.alternarFormCursos().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
+  constructor(private servCursos:ServCursosycapService) {
+    
    }
 
   ngOnInit(): void {
   }
 
+  //Metodo para crear el elemento que va a ser enviado a traves del "Output"
+  //al componente "f-academica.component" para luego ser cargado a la DB
   clickEnAgregar() {
-    if(this.nombre.length !== 0){
-      const nuevoCurso = {
-        nombre: this.nombre,
-        institucion: this.institucion,
-        tipo: this.tipo,
-        year: this.year
-      }
-      this.agregarNewCurso.emit(nuevoCurso);
-      window.location.reload();
-      } else {
-        alert("NO INGRESASTE NINGUN Curso o Capacitacion")
-      }
+    const curso = {
+      nombreCurso: this.nombreCurso,
+      institucion: this.institucion,
+      tipo: this.tipo,
+      year: this.year
+    };
+    this.agregarCurso.emit(curso);
   }
+
+
 
 }

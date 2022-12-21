@@ -11,7 +11,7 @@ import { ServHabBlandaService } from 'src/app/servicios/hab-blandas/serv-hab-bla
 })
 export class ModifhabblandaComponent implements OnInit {
 
-  //Defino la variable formAcad del tipo Academica q, en un principio, va a ser nula
+  //Defino la variable habblanda del tipo HabBlanda q, en un principio, va a ser nula
   habBlanda: HabBlanda = null;
 
 

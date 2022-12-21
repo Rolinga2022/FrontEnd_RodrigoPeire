@@ -1,49 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Curso } from 'src/app/componentes/i-cursosycap/curso';
+import { HttpClient } from '@angular/common/http';
+import { CursosYCap } from 'src/app/model/cursosycap/cursosycap';
+import { Observable } from 'rxjs';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'content-type' : 'aplication/json'
-  })
-}
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServCursosycapService {
 
-  private apiUrl = 'http://localhost:5000/cursos';
-
-  private idCurso:number = 0;
+  expURL = 'http://localhost:8080/cursos/'
 
   constructor(private http:HttpClient) { }
 
-
-  obtCursos():Observable<Curso[]> {
-    return this.http.get<Curso[]>(this.apiUrl);/*Con esto retorno, mediante una peticion get, el contenido
-    de la base de datos simulaada*/
+  //Todos los metodos a continuacion llaman a los metodos creados en el backend
+  
+  //Me devuelve la lista de cursos que se encuentran en la DB
+  public lista(): Observable<CursosYCap[]>{
+    return this.http.get<CursosYCap[]>(this.expURL + 'lista');
   }
 
-  deleteCurso(curso:Curso):Observable<Curso> {
-    const url = `${this.apiUrl}/${curso.id}`; 
-    return this.http.delete<Curso>(url);
+  //Me devuelve el curso que se corresponde con el id en la DB
+  public detail(id: number): Observable<CursosYCap> {
+    return this.http.get<CursosYCap>(this.expURL + `detail/${id}`);
   }
 
-  addCurso(curso:Curso):Observable<Curso> {
-    return this.http.post<Curso>(this.apiUrl, curso);
+  //Para guardar datos en la DB
+  public save(cursosYCap: CursosYCap): Observable<any> {
+    return this.http.post<any>(this.expURL + 'create', cursosYCap);
   }
 
-  //LOS DOS METODOS A CONTINUACION TRABAJAN EN CONJUNTO PARA MODIFICAR
-  idCursoEleg(id:any) {
-    this.idCurso = id;
-    return this.idCurso; 
+  //Para actualizar datos en la DB
+  public update(id: number, cursosYCap: CursosYCap): Observable<any> {
+    return this.http.put<any>(this.expURL + `update/${id}`, cursosYCap);
   }
-  editarCurso(cursoAModificar:Curso):Observable<Curso> {
-    const url = `${this.apiUrl}/${this.idCurso}`; //creo que logro esto: http://localhost:5000/hab-Dura/idHabDura
-    return this.http.put<Curso>(url, cursoAModificar);
+
+  //Para borrar datos en la DB
+  public delete(id: number): Observable<any>{
+    return this.http.delete<any>(this.expURL + `delete/${id}`);
   }
+ 
 
 }

@@ -1,5 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Curso } from '../curso';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CursosYCap } from 'src/app/model/cursosycap/cursosycap';
+import { ServCursosycapService } from 'src/app/servicios/cursosycap/serv-cursosycap.service';
+
 
 @Component({
   selector: 'app-modifcursos',
@@ -8,33 +11,38 @@ import { Curso } from '../curso';
 })
 export class ModifcursosComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "modifHabDura", es decir, a la lista.
-  @Output() modificarCurso: EventEmitter<Curso> = new EventEmitter();
+  //Defino la variable cursoYCap del tipo CursosYCap q, en un principio, va a ser nula
+  cursoYCap: CursosYCap = null;
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  nombre:string = "";
-  institucion:string = "";
-  tipo:string = "";
-  year:string = "";
-
-  constructor() { }
+  constructor(private router: Router, private servCursos: ServCursosycapService, private activateRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id del curso
+    this.servCursos.detail(id).subscribe(
+      data=>{
+        this.cursoYCap = data;
+      }, err=>{
+        alert("Error al modificar")
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo detail
+    )
+
   }
 
-  clickEnEditar() {
-    if(this.nombre.length !== 0){
-      const modificacionCurso = {
-        nombre: this.nombre,
-        institucion: this.institucion,
-        tipo: this.tipo,
-        year: this.year,
-      }
-      this.modificarCurso.emit(modificacionCurso);
-      window.location.reload();
-      } else {
-        alert("No realizaste modificacion")
+  //Metodo para modificar el curso
+  clickEnModificar(): void {
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id del curso
+    this.servCursos.update(id, this.cursoYCap).subscribe(
+      data => {
+        this.router.navigate(['portfolio']);
+      }, err=>{
+        alert("Error al modificar el curso/capacitacón");
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo update que esta en el servicioCurso... para agregar los datos ingresados en el formulario
+      )
     }
-  }
+
+ 
 
 }

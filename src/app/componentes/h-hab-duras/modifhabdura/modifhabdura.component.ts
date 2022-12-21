@@ -1,5 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HabDura } from '../habdura';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HabDura } from 'src/app/model/hab-dura/hab-dura';
+import { ServHabDuraService } from 'src/app/servicios/hab-duras/serv-hab-dura.service';
+
 
 @Component({
   selector: 'app-modifhabdura',
@@ -8,29 +11,41 @@ import { HabDura } from '../habdura';
 })
 export class ModifhabduraComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "modifHabDura", es decir, a la lista.
-  @Output() modificarHabDura: EventEmitter<HabDura> = new EventEmitter();
+  //Defino la variable habdura del tipo HabDura q, en un principio, va a ser nula
+  habDura: HabDura = null;
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  habilidad:string = "";
-  porcentaje:number = 0;
+  constructor(private router: Router, 
+              private servHabDura: ServHabDuraService, 
+              private activateRouter:ActivatedRoute) { }
 
-  constructor() { }
 
   ngOnInit(): void {
+
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la habdura
+    this.servHabDura.detail(id).subscribe(
+      data=>{
+        this.habDura = data;
+      }, err=>{
+        alert("Error al modificar")
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo detail
+    )
+
   }
 
-  clickEnEditar() {
-    if(this.habilidad.length !== 0){
-      const modificacionHabDura = {
-        habilidad: this.habilidad,
-        porcentaje: this.porcentaje,
-      }
-      this.modificarHabDura.emit(modificacionHabDura);
-      window.location.reload();
-      } else {
-        alert("No realizaste modificacion")
+  //Metodo para modificar la habilidad dura
+  clickEnModificar(): void {
+    const id = this.activateRouter.snapshot.params['id'];//Capturo el id de la hab dura
+    this.servHabDura.update(id, this.habDura).subscribe(
+      data => {
+        this.router.navigate(['portfolio']);
+      }, err=>{
+        alert("Error al modificar habilidad blanda");
+        this.router.navigate(['portfolio']);
+      }//llamo al metodo update que esta en el servicioHabDura para agregar los datos ingresados en el formulario
+      )
     }
-  }
+
+
 
 }

@@ -15,7 +15,7 @@ export class ServHabBlandaService {
 
   constructor(private http:HttpClient) { }
 
-   //Todos los metodos a continuacion llaman a los metodos creados en el backend
+  //Todos los metodos a continuacion llaman a los metodos creados en el backend
   
   //Me devuelve la lista de habilidades blandas academicas que se encuentran en la DB
   public lista(): Observable<HabBlanda[]>{

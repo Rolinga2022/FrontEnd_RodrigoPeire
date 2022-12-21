@@ -1,5 +1,5 @@
 <div>
-    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()">
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnAgregar()" novalidate #f="ngForm">
         <div class="form-floating mb-3 mt-3">
             <input 
             type="text"
@@ -7,7 +7,7 @@
             name="nombre"
             id="nombre"
             placeholder="Nombre"
-            [(ngModel)] = "nombre"
+            [(ngModel)] = "nombreCurso"
             >
             <label for="text">Nombre</label>
         </div>
@@ -21,7 +21,7 @@
             placeholder="Institucion"
             [(ngModel)] = "institucion"
             >
-            <label for="text">Institucion</label>
+            <label for="text">Institución</label>
         </div>
 
         <div class="form-floating mb-3 mt-3">
@@ -33,7 +33,7 @@
             placeholder="Curso o Capacitacion"
             [(ngModel)] = "tipo"
             >
-            <label for="text">Tipo</label>
+            <label for="text">Tipo (Curso/Capacitación)</label>
         </div>
 
         <div class="form-floating mb-3 mt-3">

@@ -49,7 +49,7 @@ export class GHabBlandasComponent implements OnInit {
    
   }
 
-  //Metodo para desplegar el formulario de agregar nueva formacion academica
+  //Metodo para desplegar el formulario de agregar nueva hab blanda
   alternarAgregar() {
     this.servInterfaz.mostrarAgregarHabBlanda();
   }
@@ -61,7 +61,7 @@ export class GHabBlandasComponent implements OnInit {
     })
   }
 
-  //Metodo para agregar una nueva formacion academica a la DB a traves del servicio academico
+  //Metodo para agregar una nueva hab blanda a la DB a traves del servicio hab blanda
   agregarUnaHabBlanda(habBlandaAAgregar: HabBlanda){
     this.servHabBlanda.save(habBlandaAAgregar).subscribe(
       data=>{
@@ -73,7 +73,7 @@ export class GHabBlandasComponent implements OnInit {
     )
   }
 
-  //Metodo para eliminar un formacion de la DB
+  //Metodo para eliminar un habilidad de la DB
   delete(id?: number){
     if(id != undefined){
       this.servHabBlanda.delete(id).subscribe(

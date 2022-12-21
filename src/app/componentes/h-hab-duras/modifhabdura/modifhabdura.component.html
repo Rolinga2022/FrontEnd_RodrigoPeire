@@ -1,5 +1,5 @@
-<div>
-    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnEditar()">
+<div class="container" *ngIf="habDura">
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnModificar()" novalidate #f="ngForm" >
         <div class="form-floating mb-3 mt-3">
             <input 
                 type="text"
@@ -7,7 +7,7 @@
                 name="habilidad"
                 id="habilidad"
                 placeholder="Habilidad"
-                [(ngModel)] = "habilidad"
+                [(ngModel)] = "habDura.nombreHabDura"
             >
             <label for="text">Editar Habilidad</label>
         </div>
@@ -18,7 +18,7 @@
                 name="porcentaje"
                 id="porcentaje"
                 placeholder="Porcentaje"
-                [(ngModel)] = "porcentaje"
+                [(ngModel)] = "habDura.porcentaje"
             >
             <label for="text">Editar Porcentaje</label>
         </div>

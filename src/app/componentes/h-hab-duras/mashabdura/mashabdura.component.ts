@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HabDura } from '../habdura';
-import { Subscription } from 'rxjs';
-import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { HabDura } from 'src/app/model/hab-dura/hab-dura';
+import { ServHabDuraService } from 'src/app/servicios/hab-duras/serv-hab-dura.service';
+
 
 @Component({
   selector: 'app-mashabdura',
@@ -10,35 +10,32 @@ import { ServInterfazService } from 'src/app/servicios/interfaz/serv-interfaz.se
 })
 export class MashabduraComponent implements OnInit {
 
-  //Para pasarle al elemento por fuera de "masahabblanda", es decir, a la lista.
-  @Output() agregarNewHabDura: EventEmitter<HabDura> = new EventEmitter();
+  //ESTE ES EL TS DEL FORMULARIO PARA AGREGAR UNA NUEVA habilidad dura
 
-  //voy a recibir desde el template, es decir, el formulario, lo siguiente:
-  habilidad:string = "";
+  //en este caso, para pasarselo al comp "g-habdura.component"
+  @Output() agregarHabDura: EventEmitter<HabDura> = new EventEmitter();
+  
+  //Declaro e inicializo las variables que voy a recibir del template,
+  //es decir, del formulario "mashabdura"
+  nombreHabDura:string = "";
   porcentaje:number = 0;
 
-  //para mostrar o no el formulario
-  mostrarFormulario:boolean = false;
-  subscription?: Subscription;
-
-  constructor(private servInterfaz:ServInterfazService) {
-    this.subscription = this.servInterfaz.alternarFormHabDura().subscribe(valorRecibido=> this.mostrarFormulario = valorRecibido);
-   }
+  
+  constructor(private servHabDura: ServHabDuraService) {}
 
   ngOnInit(): void {
   }
 
+  //Metodo para crear el elemento que va a ser enviado a traves del "Output"
+  //al componente "g-habdura.component" para luego ser cargado a la DB
   clickEnAgregar() {
-    if(this.habilidad.length !== 0){
-      const nuevaHabDura = {
-        habilidad: this.habilidad,
-        porcentaje: this.porcentaje,
-      }
-      this.agregarNewHabDura.emit(nuevaHabDura);
-      window.location.reload();
-      } else {
-        alert("NO INGRESASTE NINGUNA HABILIDAD DURA")
-      }
+    const habDura = {
+      nombreHabDura: this.nombreHabDura,
+      porcentaje: this.porcentaje,
+    };
+    this.agregarHabDura.emit(habDura);
   }
+
+ 
 
 }
