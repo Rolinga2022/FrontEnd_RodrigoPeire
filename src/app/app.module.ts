@@ -68,6 +68,12 @@ import { ServHabBlandaService } from './servicios/hab-blandas/serv-hab-blanda.se
 import { ServHabDuraService } from './servicios/hab-duras/serv-hab-dura.service';
 import { ServCursosycapService } from './servicios/cursosycap/serv-cursosycap.service';
 import { ServPersonaService } from './servicios/persona/serv-persona.service';
+import { ServDescripcionService } from './servicios/descripcion-pers/serv-descripcion.service';
+import { BtnagregardescComponent } from './componentes/c-encabezado/btnagregardesc/btnagregardesc.component';
+import { MasdescripcionComponent } from './componentes/c-encabezado/masdescripcion/masdescripcion.component';
+import { ModifdescripcionComponent } from './componentes/c-encabezado/modifdescripcion/modifdescripcion.component';
+
+
 
 
 
@@ -109,6 +115,10 @@ import { ServPersonaService } from './servicios/persona/serv-persona.service';
     ModifcursosComponent,
     PortfoliorpComponent,
     BienvenidaComponent,
+    BtnagregardescComponent,
+    MasdescripcionComponent,
+    ModifdescripcionComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -127,7 +137,8 @@ import { ServPersonaService } from './servicios/persona/serv-persona.service';
     ServHabBlandaService,
     ServHabDuraService,
     ServCursosycapService,
-    ServPersonaService
+    ServPersonaService,
+    ServDescripcionService
   ],
   bootstrap: [AppComponent]
 })

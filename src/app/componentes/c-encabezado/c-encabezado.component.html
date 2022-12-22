@@ -6,17 +6,30 @@
           <span class="d-block"><b>Hola,</b></span>
           <h1>Mi nombre es {{persona.nombre}} {{persona.apellido}}</h1>
         </h1>
-        <!--Trabajo/Job-->
-        <p class="text-muted fw-light"> 
-          Estudiante del Plan Argentina Programa<br>
-          Desarrollador Full Stack Jr en crecimiento<br>
-          Entusiasta de las tecnologías IT y la programación<br>
-          Estudiante avanzado de Ingeniería Química<br>
-          Técnico Universitario en Química<br>
-        </p>
-        
-      </div>
 
+        <!--Descripcion-->
+        <div class="col" *ngFor="let Descripcion of descripcion">
+          <p class="text-muted fw-light" > 
+            {{Descripcion.descripcion}}<br>
+          </p>
+          <div class="col">
+            <button *ngIf="isLogged" class="btn btn-danger" routerLink="/modificardescrip/{{Descripcion.id}}"><i class="bi bi-pencil-square"></i></button>
+            <button *ngIf="isLogged" class="btn btn-dark" (click)="delete(Descripcion.id)"><i class="bi bi-trash-fill"></i></button>
+          </div>
+        </div>
+        <br>
+        <app-btnagregardesc
+        *ngIf="isLogged"
+        textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
+        classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}" 
+        (btnClick)="alternarAgregar()"
+        ></app-btnagregardesc>
+
+        <app-masdescripcion
+          (agregarDesc)="agregarUnaDesc($event)"
+          *ngIf="mostrarFormulario">
+        </app-masdescripcion>
+      </div>
       <!--Imagen de mi persona-->
       <div class="col-8 col-md-4" >
         <div class="position-relative shadow">

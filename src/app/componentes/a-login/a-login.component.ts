@@ -54,8 +54,6 @@ export class ALoginComponent implements OnInit {
 
   }
 
- 
-
   iniciarSesion() {
     this.router.navigate(['/portfolio']) 
   }

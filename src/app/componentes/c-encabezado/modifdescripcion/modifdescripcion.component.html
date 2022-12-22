@@ -1,0 +1,15 @@
+<div class="container" *ngIf="descrip">
+    <form action="/action_page.php" class="add-form" (ngSubmit)="clickEnModificar()" novalidate #f="ngForm">
+        <div class="form-floating mb-3 mt-3">
+        <input 
+            type="text" 
+            class="form-control" 
+            id="nombreE" 
+            placeholder="Nombre" 
+            name="nombreE"
+            [(ngModel)] = "descrip.descripcion" required>
+        <label for="text">Modificar descripcion</label>
+        </div> 
+        <input type="submit" class="btn btn-danger" value="Modificar">
+    </form>
+</div>

@@ -8,6 +8,7 @@ import { ModifacademicaComponent } from './componentes/f-academica/modifacademic
 import { ModifhabblandaComponent } from './componentes/g-hab-blandas/modifhabblanda/modifhabblanda.component';
 import { ModifhabduraComponent } from './componentes/h-hab-duras/modifhabdura/modifhabdura.component';
 import { ModifcursosComponent } from './componentes/i-cursosycap/modifcursos/modifcursos.component';
+import { ModifdescripcionComponent } from './componentes/c-encabezado/modifdescripcion/modifdescripcion.component';
 
 const routes: Routes = [
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'modificarformacad/:id', component:ModifacademicaComponent},
   {path:'modificarhabblanda/:id', component:ModifhabblandaComponent},
   {path:'modificarhabdura/:id', component:ModifhabduraComponent},
-  {path:'modificarcursos/:id', component:ModifcursosComponent}
+  {path:'modificarcursos/:id', component:ModifcursosComponent},
+  {path:'modificardescrip/:id', component:ModifdescripcionComponent}
 
 
 ];

@@ -54,8 +54,28 @@ export class ServInterfazService {
   private subjectModifCursos = new Subject<any>();
   //####################################################################
 
+  //DESCRIPCION
+  //Servicio para mostrar, o no, el formulario de AGREGAR descripcion.
+  private mostrarFormDescrip:boolean = false;
+  private subjectDescrip = new Subject<any>(); // posibilita "escuchar elementos del template"
+  //Servicio para mostrar, o no, el formulario de MODIFICAR descripcion.
+  private mostrarFormModificarDesc:boolean = false;
+  private subjectDesc = new Subject<any>();
+  //####################################################################
+
 
   constructor() { }
+
+  //DESCRIPCION
+  //metodo para alternar mostrar el formulario de AGREGAR descripcion
+  mostrarAgregarDescripcion():void {
+    this.mostrarFormDescrip = !this.mostrarFormDescrip;
+    this.subjectDesc.next(this.mostrarFormDescrip);
+  }
+  alternarFormDescrip():Observable<any>{
+    return this.subjectDesc.asObservable();
+  }
+  //####################################################################
 
   //EXPERIENCIA
   //metodo para alternar mostrar el formulario de AGREGAR experiencia
