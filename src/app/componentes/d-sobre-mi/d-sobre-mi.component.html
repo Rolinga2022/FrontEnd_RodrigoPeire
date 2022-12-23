@@ -5,7 +5,8 @@
       <b>Sobre mi...</b>
     </h2>
     <br>
-    <app-btnagregardato
+    <div>
+      <app-btnagregardato
       *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
       classBtn="{{mostrarFormulario ? 'btn btn-dark' : 'btn btn-danger'}}" 
@@ -15,6 +16,7 @@
       (agregarDato)="agregarUnDato($event)"
       *ngIf="mostrarFormulario"
     ></app-masdato>
+    </div>
   </div>
   <!--Informacion-->
   <div style="float: left;">
