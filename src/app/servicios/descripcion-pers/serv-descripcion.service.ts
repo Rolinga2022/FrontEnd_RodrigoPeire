@@ -12,7 +12,7 @@ export class ServDescripcionService {
 
   constructor(private http:HttpClient) { }
 
-   //Todos los metodos a continuacion llaman a los metodos creados en el backend
+  //Todos los metodos a continuacion llaman a los metodos creados en el backend
   
   //Me devuelve la lista de descripciones que se encuentran en la DB
   public lista(): Observable<Descripcion[]>{

@@ -72,6 +72,9 @@ import { ServDescripcionService } from './servicios/descripcion-pers/serv-descri
 import { BtnagregardescComponent } from './componentes/c-encabezado/btnagregardesc/btnagregardesc.component';
 import { MasdescripcionComponent } from './componentes/c-encabezado/masdescripcion/masdescripcion.component';
 import { ModifdescripcionComponent } from './componentes/c-encabezado/modifdescripcion/modifdescripcion.component';
+import { BtnagregardatoComponent } from './componentes/d-sobre-mi/btnagregardato/btnagregardato.component';
+import { MasdatoComponent } from './componentes/d-sobre-mi/masdato/masdato.component';
+import { ModifdatoComponent } from './componentes/d-sobre-mi/modifdato/modifdato.component';
 
 
 
@@ -118,6 +121,9 @@ import { ModifdescripcionComponent } from './componentes/c-encabezado/modifdescr
     BtnagregardescComponent,
     MasdescripcionComponent,
     ModifdescripcionComponent,
+    BtnagregardatoComponent,
+    MasdatoComponent,
+    ModifdatoComponent,
     
   ],
   imports: [

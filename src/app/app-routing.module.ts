@@ -9,6 +9,7 @@ import { ModifhabblandaComponent } from './componentes/g-hab-blandas/modifhabbla
 import { ModifhabduraComponent } from './componentes/h-hab-duras/modifhabdura/modifhabdura.component';
 import { ModifcursosComponent } from './componentes/i-cursosycap/modifcursos/modifcursos.component';
 import { ModifdescripcionComponent } from './componentes/c-encabezado/modifdescripcion/modifdescripcion.component';
+import { ModifdatoComponent } from './componentes/d-sobre-mi/modifdato/modifdato.component';
 
 const routes: Routes = [
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'modificarhabblanda/:id', component:ModifhabblandaComponent},
   {path:'modificarhabdura/:id', component:ModifhabduraComponent},
   {path:'modificarcursos/:id', component:ModifcursosComponent},
-  {path:'modificardescrip/:id', component:ModifdescripcionComponent}
+  {path:'modificardescrip/:id', component:ModifdescripcionComponent},
+  {path:'modificardato/:id', component:ModifdatoComponent}
 
 
 ];

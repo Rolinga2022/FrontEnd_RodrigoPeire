@@ -63,6 +63,15 @@ export class ServInterfazService {
   private subjectDesc = new Subject<any>();
   //####################################################################
 
+  //DATOS
+  //Servicio para mostrar, o no, el formulario de AGREGAR datos
+  private mostrarFormDato:boolean = false;
+  private subjectDato = new Subject<any>(); // posibilita "escuchar elementos del template"
+  //Servicio para mostrar, o no, el formulario de MODIFICAR descripcion.
+  private mostrarFormModificarDato:boolean = false;
+  private subjectDatos = new Subject<any>();
+  //####################################################################
+
 
   constructor() { }
 
@@ -74,6 +83,17 @@ export class ServInterfazService {
   }
   alternarFormDescrip():Observable<any>{
     return this.subjectDesc.asObservable();
+  }
+  //####################################################################
+
+  //DATOS
+  //metodo para alternar mostrar el formulario de AGREGAR datos
+  mostrarAgregarDato():void {
+    this.mostrarFormDato = !this.mostrarFormDato;
+    this.subjectDato.next(this.mostrarFormDato);
+  }
+  alternarFormDato():Observable<any>{
+    return this.subjectDato.asObservable();
   }
   //####################################################################
 

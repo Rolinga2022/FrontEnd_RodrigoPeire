@@ -17,7 +17,7 @@ export class CEncabezadoComponent implements OnInit {
 
   persona: persona = new persona('','','');
 
-  //Para mostrar formulario de AGREGAR experiencia
+  //Para mostrar formulario de AGREGAR descripcion
   mostrarFormulario:boolean = false;
   subscription?: Subscription;
 
