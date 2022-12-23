@@ -23,7 +23,7 @@
         {{Dato.dato}}
       </p>
       <div class="col">
-        <button *ngIf="isLogged" class="btn btn-danger" routerLink="/modificarsobremi/{{Dato.id}}"><i class="bi bi-pencil-square"></i></button>
+        <button *ngIf="isLogged" class="btn btn-danger" routerLink="/modificardato/{{Dato.id}}"><i class="bi bi-pencil-square"></i></button>
         <button *ngIf="isLogged" class="btn btn-dark" (click)="delete(Dato.id)"><i class="bi bi-trash-fill"></i></button>
       </div>
     </div>
