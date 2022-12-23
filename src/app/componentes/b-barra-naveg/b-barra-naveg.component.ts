@@ -27,7 +27,6 @@ export class BBarraNavegComponent implements OnInit {
     this.tokenService.logOut();
     this.isLogged = false;
     this.router.navigate(['']);
-    window.location.reload();
   }
 
   login() {
