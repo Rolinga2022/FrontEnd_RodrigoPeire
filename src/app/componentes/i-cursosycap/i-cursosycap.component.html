@@ -1,7 +1,7 @@
 <div class="container">
   <!--Titulo del componente y boton agregar-->
   <header>
-    <h1>{{titulocomponente}}</h1>
+    <h1><b>{{titulocomponente}}</b></h1>
 
     <app-btnaddcursos
       *ngIf="isLogged"
@@ -21,7 +21,7 @@
 
   <!--Lista de Cursos-->  
   <div *ngFor="let Curso of curso">
-    <div class="itemcursos">
+    <div class="itemcursos text-muted">
       <hr>
       <ul>
         <li>
@@ -33,7 +33,7 @@
           </h2>
           <p class="lead">{{Curso.institucion}}</p>
           <p class="lead">{{Curso.tipo}}</p>
-          <p class="lead">{{Curso.year}}</p>
+          <p class="lead"><i>{{Curso.year}}</i></p>
         </li>
       </ul>
     </div>

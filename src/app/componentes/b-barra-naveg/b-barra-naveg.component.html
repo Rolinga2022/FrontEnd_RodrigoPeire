@@ -21,7 +21,22 @@
       <!--Items / Elementos anclados o linkeados-->
       <div class="collapse navbar-collapse" id="mainNav">
         <div class="nav ms-auto textdark flex-column flex-md-row">
-          
+
+          <!--Redes Sociales / Social networks-->
+        <div class="d-none d-md-block icons-social-networks">
+          <!--Facebook-->
+          <a href="https://www.facebook.com/rodrigo.peire/" target="_blank">
+            <img src="assets/img/iconoRedes/facebook.svg" alt="Facebook"  >
+            </a>
+          <!--LinkedIn-->
+          <a href="https://ar.linkedin.com/in/rodrigo-peire-52102a14b" target="_blank">
+            <img src="assets/img/iconoRedes/linkedin.svg" alt="linkedin">
+            </a> 
+          <!--GitHub-->
+          <a href="https://github.com/Rolinga2022" target="_blank">
+            <img src="assets/img/iconoRedes/github.svg" alt="github"  >
+            </a>          
+        </div>
 
           <button class="btn btn-danger" (click)="login()"  *ngIf="!isLogged">Iniciar sesión</button>
           <button class="btn btn-dark" style="margin-left: 5px;" (click)="onLogOut()" *ngIf="isLogged">Cerrar sesión</button>

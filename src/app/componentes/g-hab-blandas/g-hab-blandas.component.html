@@ -1,6 +1,6 @@
 <div class="container">
   <header>
-    <h1>{{titulocomponente}}</h1>
+    <h1><b>{{titulocomponente}}</b></h1>
     <app-btnaddblanda 
       *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
@@ -22,6 +22,7 @@
             [percent]="(HabBlanda.porcentaje)"
             [radius]="100"
             [title]="(HabBlanda.nombreHabBlanda)"
+            [titleFontWeight]="'550'"
             [showUnits]="false"
             [showSubtitle]="false"
             [responsive]="true"

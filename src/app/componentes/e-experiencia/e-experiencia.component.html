@@ -1,7 +1,7 @@
 <div class="container">
   <!--Titulo del componente y boton agregar-->
   <header>
-    <h1>{{titulocomponente}}</h1>
+    <h1><b>{{titulocomponente}}</b></h1>
     <app-btnagregar 
       *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
@@ -19,7 +19,7 @@
 
   <!--Lista de Experiencias Laborales-->  
   <div *ngFor="let Experiencia of expe">
-    <div class="itemexperiencia">
+    <div class="itemexperiencia text-muted">
       <hr>
       <ul>
         <li>

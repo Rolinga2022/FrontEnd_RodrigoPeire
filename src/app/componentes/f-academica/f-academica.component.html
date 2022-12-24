@@ -1,7 +1,7 @@
 <div class="container">
   <!--Titulo del componente y boton agregar-->
   <header>
-    <h1>{{titulocomponente}}</h1>
+    <h1><b>{{titulocomponente}}</b></h1>
     <app-btnagregaracad 
       *ngIf="isLogged"
       textBtn="{{mostrarFormulario ? 'Cerrar' : 'Agregar'}}"
@@ -18,7 +18,7 @@
 
   <!--Lista de Formaciones academicas-->  
   <div *ngFor="let Formacion of formacion">
-    <div class="itemacademico">
+    <div class="itemacademico text-muted">
       <hr>
       <ul>
         <li>
@@ -29,7 +29,7 @@
             </div>
           </h2>
           <p class="lead">{{Formacion.titulo}}</p>
-          <p class="lead">{{Formacion.duracion}}</p>
+          <p class="lead"><i>{{Formacion.duracion}}</i></p>
         </li>
       </ul>
     </div>
