@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/portfolio-rpyo-pr",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
