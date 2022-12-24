@@ -10,7 +10,7 @@ import { Experiencia } from 'src/app/model/experiencia/experiencia';
 
 export class ServExperienService {
 
-  expURL = 'http://localhost:8080/explab/'
+  expURL = 'http://backendrodrigopeire-production.up.railway.app/explab/'
   
 
   constructor(private http:HttpClient) {}

@@ -10,7 +10,7 @@ import { Academica } from 'src/app/model/academica/academica';
 
 export class ServFormacionService {
 
-  expURL = 'http://localhost:8080/academico/'
+  expURL = 'http://backendrodrigopeire-production.up.railway.app/academico/'
 
   constructor(private http:HttpClient) { }
 

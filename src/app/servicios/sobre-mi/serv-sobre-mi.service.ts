@@ -8,7 +8,7 @@ import { SobreMi } from 'src/app/model/sobre-mi/sobre-mi';
 })
 export class ServSobreMiService {
 
-  expURL = 'http://localhost:8080/sobremi/'
+  expURL = 'http://backendrodrigopeire-production.up.railway.app/sobremi/'
 
   constructor(private http:HttpClient) { }
 

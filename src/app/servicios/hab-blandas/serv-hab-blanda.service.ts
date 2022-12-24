@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ServHabBlandaService {
 
-  expURL = 'http://localhost:8080/habblanda/'
+  expURL = 'http://backendrodrigopeire-production.up.railway.app/habblanda/'
 
   constructor(private http:HttpClient) { }
 
