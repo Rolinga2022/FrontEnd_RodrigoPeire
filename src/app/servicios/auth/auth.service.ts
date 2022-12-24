@@ -11,7 +11,7 @@ import { NuevoUsuario } from 'src/app/model/nuevo-usuario/nuevo-usuario';
 })
 export class AuthService {
 
-  authURL = 'http://backendrodrigopeire-production.up.railway.app/auth/';
+  authURL = 'https://backendrodrigopeire-production.up.railway.app/auth/';
 
 
   constructor(private http:HttpClient) { }

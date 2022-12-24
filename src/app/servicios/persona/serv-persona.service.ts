@@ -9,7 +9,7 @@ import { persona } from 'src/app/model/persona/persona.model';
 })
 export class ServPersonaService {
 
-  Url = 'http://backendrodrigopeire-production.up.railway.app/personas/';
+  Url = 'https://backendrodrigopeire-production.up.railway.app/personas/';
 
   constructor(private http: HttpClient) { }
 

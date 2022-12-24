@@ -8,7 +8,7 @@ import { Descripcion } from 'src/app/model/descripcion-pers/descripcion-pers';
 })
 export class ServDescripcionService {
 
-  expURL = 'http://backendrodrigopeire-production.up.railway.app/descripcion/'
+  expURL = 'https://backendrodrigopeire-production.up.railway.app/descripcion/'
 
   constructor(private http:HttpClient) { }
 

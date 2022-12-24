@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class ServCursosycapService {
 
-  expURL = 'http://backendrodrigopeire-production.up.railway.app/cursos/'
+  expURL = 'https://backendrodrigopeire-production.up.railway.app/cursos/'
 
   constructor(private http:HttpClient) { }
 
