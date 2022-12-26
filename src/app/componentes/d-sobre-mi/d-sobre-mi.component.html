@@ -1,8 +1,8 @@
 <div class="container">   
-  <div class="col-4 text-center" style="float: left;">
+  <div class="col-md-4 col-lg-4 text-center" style="float: left;">
     <!--titulo-->
     <h2 class="display-4">
-      <b>Sobre mi...</b>
+      <b>Sobre mi..</b>
     </h2>
     <br>
     <div>
@@ -19,7 +19,7 @@
     </div>
   </div>
   <!--Informacion-->
-  <div style="float: left;">
+  <div class="col-md-8 col-lg-8" style="float: left;">
     <div *ngFor="let Dato of datos" > <!--este id es del sig apartado, pero lo coloco aca para que me direccione bien piola-->
       <p class="text-muted fw-light">
         {{Dato.dato}}
